@@ -8,8 +8,12 @@ import * as UserService from './services/UserService'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetUser, updateUser } from './redux/slides/userSlide'
 import Loading from './components/LoadingComponent/Loading'
+import { useQuery } from '@tanstack/react-query'
+import axios from 'axios'
+import process from "process";
 
 function App() {
+  const axiosJWT = axios.create()
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false)
   const user = useSelector((state) => state.user)
@@ -59,6 +63,18 @@ function App() {
     const res = await UserService.getDetailsUser(id, token)
     dispatch(updateUser({ ...res?.data, access_token: token, refreshToken: refreshToken}))
   }
+
+  // useEffect(() => {
+  //   fetchApi()
+  // }, [])
+  // console.log('process.env.REACT_APP_API_KEY', process.env.REACT_APP_API_KEY)
+  // const fetchApi = async () => {
+  //   const res = await axios.get(`${process.env.REACT_APP_API_KEY}/product/get-all?filter=name&filter=${search}&limit=${limit}`)
+  //   // console.log('res', res)
+  //   return res.data
+  // }
+  // const query = useQuery({ queryKey: ['todos'], queryFn: fetchApi })
+  // console.log('query', query)
 
   return (
     <div style={{height: '100vh', width: '100%'}}>

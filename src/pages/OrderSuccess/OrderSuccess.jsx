@@ -49,7 +49,7 @@ const OrderSucess = () => {
                       </div>
                       <div style={{flex: 1, display: 'flex', alignItems: 'center',gap: '10px'}}>
                         <span>
-                          <span style={{ fontSize: '13px', color: '#242424' }}>Giá tiền: {convertPrice(order?.price)}</span>
+                          <span style={{ fontSize: '13px', color: '#242424' }}>Giá tiền: {convertPrice(order?.donGia)}</span>
                         </span>
                         <span>
                           <span style={{ fontSize: '13px', color: '#242424' }}>Số lượng: {order?.amount}</span>

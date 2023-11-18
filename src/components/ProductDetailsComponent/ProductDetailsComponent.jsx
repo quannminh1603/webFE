@@ -45,9 +45,9 @@ const ProductDetailsComponent = ({idProduct}) => {
 
     useEffect(() => {
         const orderRedux = order?.orderItems?.find((item) => item.product === productDetails?._id) 
-        if((orderRedux?.amount + numProduct) <= orderRedux?.countInstock || (!orderRedux && productDetails?.countInStock > 0)) {
+        if((orderRedux?.amount + numProduct) <= orderRedux?.soLuongConLai || (!orderRedux && productDetails?.soLuongConLai > 0)) {
             setErrorLimitOrder(false)
-        } else if(productDetails?.countInStock === 0){
+        } else if(productDetails?.soLuongConLai === 0){
             setErrorLimitOrder(true)
         }
     },[numProduct])
@@ -90,16 +90,16 @@ const ProductDetailsComponent = ({idProduct}) => {
             //     },
             // },
             const orderRedux = order?.orderItems?.find((item) => item.product === productDetails?._id)
-            if((orderRedux?.amount + numProduct) <= orderRedux?.countInstock || (!orderRedux && productDetails?.countInStock > 0)) {
+            if((orderRedux?.amount + numProduct - 2) <= orderRedux?.soLuongConLai || (!orderRedux && productDetails?.soLuongConLai > 0)) {
                 dispatch(addOrderProduct({
                     orderItem: {
-                        name: productDetails?.name,
+                        tenSanPham: productDetails?.tenSanPham,
                         amount: numProduct,
-                        image: productDetails?.image,
-                        price: productDetails?.price,
+                        hinhAnh: productDetails?.hinhAnh,
+                        donGia: productDetails?.donGia,
                         product: productDetails?._id,
                         discount: productDetails?.discount,
-                        countInstock: productDetails?.countInStock
+                        soLuongConLai: productDetails?.soLuongConLai
                     }
                 }))
             } else {
@@ -112,7 +112,7 @@ const ProductDetailsComponent = ({idProduct}) => {
         <Loading isLoading={isLoading}>
             <Row style={{ padding: '16px', background: '#fff', borderRadius: '4px', height:'100%' }}>
                 <Col span={10} style={{ borderRight: '1px solid #e5e5e5', paddingRight: '8px' }}>
-                    <Image src={productDetails?.image} alt="image prodcut" preview={false} />
+                    <Image src={productDetails?.hinhAnh} alt="image prodcut" preview={false} />
                     <Row style={{ paddingTop: '10px', justifyContent: 'space-between' }}>
                         <WrapperStyleColImage span={4} sty>
                             <WrapperStyleImageSmall src={imageProductSmall} alt="image small" preview={false} />
@@ -140,17 +140,17 @@ const ProductDetailsComponent = ({idProduct}) => {
                     </Row>
                 </Col>
                 <Col span={14} style={{ paddingLeft: '10px' }}>
-                    <WrapperStyleNameProduct>{productDetails?.name}</WrapperStyleNameProduct>
+                    <WrapperStyleNameProduct>{productDetails?.tenSanPham}</WrapperStyleNameProduct>
                     <div>
                         <Rate allowHalf defaultValue={productDetails?.rating} value={productDetails?.rating} />
                         <WrapperStyleTextSell> | Da ban 1000+</WrapperStyleTextSell>
                     </div>
                     <WrapperPriceProduct>
-                        <WrapperPriceTextProduct>{convertPrice(productDetails?.price)}</WrapperPriceTextProduct>
+                        <WrapperPriceTextProduct>{convertPrice(productDetails?.donGia)}</WrapperPriceTextProduct>
                     </WrapperPriceProduct>
                     <WrapperAddressProduct>
                         <span>Giao đến </span>
-                        <span className='address'>{user?.address}</span> -
+                        <span className='address'>{user?.diaChi}</span> -
                         <span className='change-address'>Đổi địa chỉ</span>
                     </WrapperAddressProduct>
                     <LikeButtonComponent
@@ -160,13 +160,13 @@ const ProductDetailsComponent = ({idProduct}) => {
                             } 
                     />
                     <div style={{ margin: '10px 0 20px', padding: '10px 0', borderTop: '1px solid #e5e5e5', borderBottom: '1px solid #e5e5e5' }}>
-                        <div style={{ marginBottom: '10px' }}>Số lượng</div>
+                        <div style={{ marginBottom: '10px' }}>Số lượng còn lại: {productDetails?.soLuongConLai}</div>
                         <WrapperQualityProduct>
                             <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('decrease',numProduct === 1)}>
                                 <MinusOutlined style={{ color: '#000', fontSize: '20px' }} />
                             </button>
-                            <WrapperInputNumber onChange={onChange} defaultValue={1} max={productDetails?.countInStock} min={1} value={numProduct} size="small" />
-                            <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('increase',  numProduct === productDetails?.countInStock)}>
+                            <WrapperInputNumber onChange={onChange} defaultValue={1} max={productDetails?.soLuongConLai} min={1} value={numProduct} size="small" />
+                            <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('increase',  numProduct === productDetails?.soLuongConLai)}>
                                 <PlusOutlined style={{ color: '#000', fontSize: '20px' }} />
                             </button>
                         </WrapperQualityProduct>
@@ -174,6 +174,7 @@ const ProductDetailsComponent = ({idProduct}) => {
                     <div style={{ display: 'flex', aliggItems: 'center', gap: '12px' }}>
                         <div>
                             <ButtonComponent
+                            // { productDetails?.soLuongConLai === 0}
                                 size={40}
                                 styleButton={{
                                     background: 'rgb(255, 57, 69)',
@@ -186,7 +187,7 @@ const ProductDetailsComponent = ({idProduct}) => {
                                 textbutton={'Chọn mua'}
                                 styleTextButton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
                             ></ButtonComponent>
-                            {errorLimitOrder && <div style={{color: 'red'}}>San pham het hang</div>}
+                            {errorLimitOrder === true && <div style={{color: 'red'}}>Sản phẩm hết hàng</div>}
                         </div>
                         <ButtonComponent
                             size={40}

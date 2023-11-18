@@ -31,7 +31,7 @@ const NavBarComponent = () => {
                         </div>
                     )
                 })
-            case 'price':
+            case 'donGia':
                 return options.map((option) => {
                     return (
                         <WrapperTextPrice>{option}</WrapperTextPrice>

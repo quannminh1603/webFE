@@ -17,7 +17,7 @@ import { updateUser } from '../../redux/slides/userSlide'
 const SignInPage = () => {
   const [isShowPassword, setIsShowPassword] = useState(false)
   const location = useLocation()
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const user  = useSelector((state) => state.user)
@@ -59,8 +59,8 @@ const SignInPage = () => {
     navigate('/sign-up')
   }
 
-  const handleOnchangeEmail = (value) => {
-    setEmail(value)
+  const handleOnchangeUsername = (value) => {
+    setUsername(value)
   }
 
   const handleOnchangePassword = (value) => {
@@ -70,7 +70,7 @@ const SignInPage = () => {
   const handleSignIn = () => {
     console.log('logingloin')
     mutation.mutate({
-      email,
+      username,
       password
     })
   }
@@ -81,7 +81,7 @@ const SignInPage = () => {
         <WrapperContainerLeft>
           <h1>Xin chào</h1>
           <p>Đăng nhập vào tạo tài khoản</p>
-          <InputForm style={{ marginBottom: '10px' }} placeholder="abc@gmail.com" value={email} onChange={handleOnchangeEmail} />
+          <InputForm style={{ marginBottom: '10px' }} placeholder="abc@gmail.com" value={username} onChange={handleOnchangeUsername} />
           <div style={{ position: 'relative' }}>
             <span
               onClick={() => setIsShowPassword(!isShowPassword)}
@@ -109,7 +109,7 @@ const SignInPage = () => {
           {data?.status === 'ERR' && <span style={{ color: 'red' }}>{data?.message}</span>}
           <Loading isLoading={isLoading}>
             <ButtonComponent
-              disabled={!email.length || !password.length}
+              disabled={!username.length || !password.length}
               onClick={handleSignIn}
               size={40}
               styleButton={{

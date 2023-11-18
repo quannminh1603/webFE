@@ -62,12 +62,14 @@ const HomePage = () => {
               return (
                 <CardComponent
                   key={product._id}
-                  countInStock={product.countInStock}
+                  tenSanPham={product.tenSanPham}
+                  mount={product.mount}
+                  soLuongConLai={product.soLuongConLai}
                   description={product.description}
-                  image={product.image}
-                  name={product.name}
-                  price={product.price}
+                  hinhAnh={product.hinhAnh}
+                  donGia={product.donGia}
                   rating={product.rating}
+                  size={product.size}
                   type={product.type}
                   selled={product.selled}
                   discount={product.discount}

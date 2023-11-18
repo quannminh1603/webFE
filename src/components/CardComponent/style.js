@@ -20,6 +20,14 @@ export const StyleNameProduct = styled.div`
     font-weight: 400;
 `
 
+export const StyleMountProduct = styled.div`
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: rgb(56, 56, 61);
+    font-weight: 400;
+`
+
 export const WrapperReportText = styled.div`
     font-size: 11px;
     color: rgb(128, 128, 137);

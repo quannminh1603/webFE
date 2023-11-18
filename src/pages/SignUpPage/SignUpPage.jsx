@@ -18,12 +18,12 @@ const SignUpPage = () => {
 
   const [isShowPassword, setIsShowPassword] = useState(false)
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false)
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleOnchangeEmail = (value) => {
-    setEmail(value)
+  const handleOnchangeUsername = (value) => {
+    setUsername(value)
   }
 
   const mutation = useMutationHooks(
@@ -54,7 +54,7 @@ const SignUpPage = () => {
   }
 
   const handleSignUp = () => {
-    mutation.mutate({ email, password, confirmPassword })
+    mutation.mutate({ username, password, confirmPassword })
   }
 
   return (
@@ -63,7 +63,7 @@ const SignUpPage = () => {
         <WrapperContainerLeft>
           <h1>Xin chào</h1>
           <p>Đăng nhập vào tạo tài khoản</p>
-          <InputForm style={{ marginBottom: '10px' }} placeholder="abc@gmail.com" value={email} onChange={handleOnchangeEmail} />
+          <InputForm style={{ marginBottom: '10px' }} placeholder="abc@gmail.com" value={username} onChange={handleOnchangeUsername} />
           <div style={{ position: 'relative' }}>
             <span
               onClick={() => setIsShowPassword(!isShowPassword)}
@@ -108,7 +108,7 @@ const SignUpPage = () => {
           {data?.status === 'ERR' && <span style={{ color: 'red' }}>{data?.message}</span>}
           <Loading isLoading={isLoading}>
             <ButtonComponent
-              disabled={!email.length || !password.length || !confirmPassword.length}
+              disabled={!username.length || !password.length || !confirmPassword.length}
               onClick={handleSignUp}
               size={40}
               styleButton={{

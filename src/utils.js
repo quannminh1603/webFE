@@ -44,9 +44,9 @@ export const renderOptions = (arr) => {
     return results
 }
 
-export const convertPrice = (price) => {
+export const convertPrice = (donGia) => {
     try {
-        const result  = price?.toLocaleString().replaceAll(',', '.')
+        const result  = donGia?.toLocaleString().replaceAll(',', '.')
         return `${result} VND`
     } catch (error) {
         return null

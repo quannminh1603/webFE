@@ -16,10 +16,11 @@ import { getBase64 } from '../../utils'
 
 const ProfilePage = () => {
     const user = useSelector((state) => state.user)
+    const [username, setUsername] = useState('')
+    const [hoTenKH, setHoTenKH] = useState('')
+    const [sdt, setSdt] = useState('')
+    const [diaChi, setDiaChi] = useState('')
     const [email, setEmail] = useState('')
-    const [name, setName] = useState('')
-    const [phone, setPhone] = useState('')
-    const [address, setAddress] = useState('')
     const [avatar, setAvatar] = useState('')
     const mutation = useMutationHooks(
         (data) => {
@@ -32,10 +33,11 @@ const ProfilePage = () => {
     const { data, isLoading, isSuccess, isError } = mutation
 
     useEffect(() => {
+        setUsername(user?.username)
+        setHoTenKH(user?.hoTenKH)
+        setSdt(user?.sdt)
+        setDiaChi(user?.diaChi)
         setEmail(user?.email)
-        setName(user?.name)
-        setPhone(user?.phone)
-        setAddress(user?.address)
         setAvatar(user?.avatar)
     }, [user])
 
@@ -52,18 +54,21 @@ const ProfilePage = () => {
         const res = await UserService.getDetailsUser(id, token)
         dispatch(updateUser({ ...res?.data, access_token: token }))
     }
+    const handleOnchangeUsername = (value) => {
+        setUsername(value)
+    }
 
     const handleOnchangeEmail = (value) => {
         setEmail(value)
     }
-    const handleOnchangeName = (value) => {
-        setName(value)
+    const handleOnchangeHoTenKH = (value) => {
+        setHoTenKH(value)
     }
-    const handleOnchangePhone = (value) => {
-        setPhone(value)
+    const handleOnchangeSdt = (value) => {
+        setSdt(value)
     }
-    const handleOnchangeAddress = (value) => {
-        setAddress(value)
+    const handleOnchangeDiaChi = (value) => {
+        setDiaChi(value)
     }
 
     const handleOnchangeAvatar = async ({fileList}) => {
@@ -73,9 +78,8 @@ const ProfilePage = () => {
         }
         setAvatar(file.preview)
     }
-
     const handleUpdate = () => {
-        mutation.mutate({ id: user?.id, email, name, phone, address, avatar, access_token: user?.access_token })
+        mutation.mutate({ id: user?.id, username, hoTenKH, sdt, diaChi, email, avatar, access_token: user?.access_token })
 
     }
     return (
@@ -84,8 +88,8 @@ const ProfilePage = () => {
             <Loading isLoading={isLoading}>
                 <WrapperContentProfile>
                     <WrapperInput>
-                        <WrapperLabel htmlFor="name">Name</WrapperLabel>
-                        <InputForm style={{ width: '300px' }} id="name" value={name} onChange={handleOnchangeName} />
+                        <WrapperLabel htmlFor="name">Username</WrapperLabel>
+                        <InputForm style={{ width: '300px' }} id="username" value={username} onChange={handleOnchangeUsername} />
                         <ButtonComponent
                             onClick={handleUpdate}
                             size={40}
@@ -100,8 +104,8 @@ const ProfilePage = () => {
                         ></ButtonComponent>
                     </WrapperInput>
                     <WrapperInput>
-                        <WrapperLabel htmlFor="email">Email</WrapperLabel>
-                        <InputForm style={{ width: '300px' }} id="email" value={email} onChange={handleOnchangeEmail} />
+                        <WrapperLabel htmlFor="name">hoTenKH</WrapperLabel>
+                        <InputForm style={{ width: '300px' }} id="name" value={hoTenKH} onChange={handleOnchangeHoTenKH} />
                         <ButtonComponent
                             onClick={handleUpdate}
                             size={40}
@@ -116,8 +120,40 @@ const ProfilePage = () => {
                         ></ButtonComponent>
                     </WrapperInput>
                     <WrapperInput>
-                        <WrapperLabel htmlFor="phone">Phone</WrapperLabel>
-                        <InputForm style={{ width: '300px' }} id="email" value={phone} onChange={handleOnchangePhone} />
+                        <WrapperLabel htmlFor="email">sdt</WrapperLabel>
+                        <InputForm style={{ width: '300px' }} id="email" value={sdt} onChange={handleOnchangeSdt} />
+                        <ButtonComponent
+                            onClick={handleUpdate}
+                            size={40}
+                            styleButton={{
+                                height: '30px',
+                                width: 'fit-content',
+                                borderRadius: '4px',
+                                padding: '2px 6px 6px'
+                            }}
+                            textbutton={'Cập nhật'}
+                            styleTextButton={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700' }}
+                        ></ButtonComponent>
+                    </WrapperInput>
+                    <WrapperInput>
+                        <WrapperLabel htmlFor="phone">diaChi</WrapperLabel>
+                        <InputForm style={{ width: '300px' }} id="email" value={diaChi} onChange={handleOnchangeDiaChi} />
+                        <ButtonComponent
+                            onClick={handleUpdate}
+                            size={40}
+                            styleButton={{
+                                height: '30px',
+                                width: 'fit-content',
+                                borderRadius: '4px',
+                                padding: '2px 6px 6px'
+                            }}
+                            textbutton={'Cập nhật'}
+                            styleTextButton={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700' }}
+                        ></ButtonComponent>
+                    </WrapperInput>
+                    <WrapperInput>
+                        <WrapperLabel htmlFor="address">Email</WrapperLabel>
+                        <InputForm style={{ width: '300px' }} id="address" value={email} onChange={handleOnchangeEmail} />
                         <ButtonComponent
                             onClick={handleUpdate}
                             size={40}
@@ -145,22 +181,6 @@ const ProfilePage = () => {
                             }} alt="avatar"/>
                         )}
                         {/* <InputForm style={{ width: '300px' }} id="avatar" value={avatar} onChange={handleOnchangeAvatar} /> */}
-                        <ButtonComponent
-                            onClick={handleUpdate}
-                            size={40}
-                            styleButton={{
-                                height: '30px',
-                                width: 'fit-content',
-                                borderRadius: '4px',
-                                padding: '2px 6px 6px'
-                            }}
-                            textbutton={'Cập nhật'}
-                            styleTextButton={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700' }}
-                        ></ButtonComponent>
-                    </WrapperInput>
-                    <WrapperInput>
-                        <WrapperLabel htmlFor="address">Address</WrapperLabel>
-                        <InputForm style={{ width: '300px' }} id="address" value={address} onChange={handleOnchangeAddress} />
                         <ButtonComponent
                             onClick={handleUpdate}
                             size={40}

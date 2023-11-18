@@ -30,10 +30,9 @@ const PaymentPage = () => {
 
   const [isOpenModalUpdateInfo, setIsOpenModalUpdateInfo] = useState(false)
   const [stateUserDetails, setStateUserDetails] = useState({
-    name: '',
-    phone: '',
-    address: '',
-    city: ''
+    hoTenKH: '',
+    sdt: '',
+    diaChi: ''
   })
   const [form] = Form.useForm();
 
@@ -47,10 +46,9 @@ const PaymentPage = () => {
   useEffect(() => {
     if(isOpenModalUpdateInfo) {
       setStateUserDetails({
-        city: user?.city,
-        name: user?.name,
-        address: user?.address,
-        phone: user?.phone
+        hoTenKH: user?.hoTenKH,
+        diaChi: user?.address,
+        sdt: user?.sdt
       })
     }
   }, [isOpenModalUpdateInfo])
@@ -61,7 +59,7 @@ const PaymentPage = () => {
 
   const priceMemo = useMemo(() => {
     const result = order?.orderItemsSlected?.reduce((total, cur) => {
-      return total + ((cur.price * cur.amount))
+      return total + ((cur.donGia * cur.amount))
     },0)
     return result
   },[order])
@@ -69,7 +67,8 @@ const PaymentPage = () => {
   const priceDiscountMemo = useMemo(() => {
     const result = order?.orderItemsSlected?.reduce((total, cur) => {
       const totalDiscount = cur.discount ? cur.discount : 0
-      return total + (priceMemo * (totalDiscount  * cur.amount) / 100)
+      // return total + (priceMemo * (totalDiscount  * cur.amount) / 100)
+      return total + (priceMemo * 0.1)
     },0)
     if(Number(result)){
       return result
@@ -92,17 +91,16 @@ const PaymentPage = () => {
   },[priceMemo,priceDiscountMemo, diliveryPriceMemo])
 
   const handleAddOrder = () => {
-    if(user?.access_token && order?.orderItemsSlected && user?.name
-      && user?.address && user?.phone && user?.city && priceMemo && user?.id) {
+    if(user?.access_token && order?.orderItemsSlected && user?.hoTenKH
+      && user?.diaChi && user?.sdt && priceMemo && user?.id) {
         // eslint-disable-next-line no-unused-expressions
         mutationAddOrder.mutate(
           { 
             token: user?.access_token, 
             orderItems: order?.orderItemsSlected, 
-            fullName: user?.name,
-            address:user?.address, 
-            phone:user?.phone,
-            city: user?.city,
+            hoTenKH: user?.hoTenKH,
+            diaChi:user?.diaChi, 
+            sdt:user?.sdt,
             paymentMethod: payment,
             itemsPrice: priceMemo,
             shippingPrice: diliveryPriceMemo,
@@ -161,12 +159,12 @@ const PaymentPage = () => {
     }
   }, [isSuccess,isError])
 
-  const handleCancleUpdate = () => {
+  const handleCancelUpdate = () => {
     setStateUserDetails({
-      name: '',
+      hoTenKH: '',
       email: '',
-      phone: '',
-      isAdmin: false,
+      sdt: '',
+      role: false,
     })
     form.resetFields()
     setIsOpenModalUpdateInfo(false)
@@ -177,10 +175,9 @@ const PaymentPage = () => {
       { 
         token: user?.access_token, 
         orderItems: order?.orderItemsSlected, 
-        fullName: user?.name,
-        address:user?.address, 
-        phone:user?.phone,
-        city: user?.city,
+        hoTenKH: user?.hoTenKH,
+        diaChi:user?.diaChi, 
+        sdt:user?.sdt,
         paymentMethod: payment,
         itemsPrice: priceMemo,
         shippingPrice: diliveryPriceMemo,
@@ -195,11 +192,11 @@ const PaymentPage = () => {
 
 
   const handleUpdateInforUser = () => {
-    const {name, address,city, phone} = stateUserDetails
-    if(name && address && city && phone){
+    const {hoTenKH, diaChi, sdt} = stateUserDetails
+    if(hoTenKH && diaChi && sdt){
       mutationUpdate.mutate({ id: user?.id, token: user?.access_token, ...stateUserDetails }, {
         onSuccess: () => {
-          dispatch(updateUser({name, address,city, phone}))
+          dispatch(updateUser({hoTenKH, diaChi, sdt}))
           setIsOpenModalUpdateInfo(false)
         }
       })
@@ -209,7 +206,7 @@ const PaymentPage = () => {
   const handleOnchangeDetails = (e) => {
     setStateUserDetails({
       ...stateUserDetails,
-      [e.target.name]: e.target.value
+      [e.target.hoTenKH]: e.target.value
     })
   }
   const handleDilivery = (e) => {
@@ -271,7 +268,7 @@ const PaymentPage = () => {
                 <WrapperInfo>
                   <div>
                     <span>Địa chỉ: </span>
-                    <span style={{fontWeight: 'bold'}}>{ `${user?.address} ${user?.city}`} </span>
+                    <span style={{fontWeight: 'bold'}}>{ `${user?.diaChi}` } </span>
                     <span onClick={handleChangeAddress} style={{color: '#9255FD', cursor:'pointer'}}>Thay đổi</span>
                   </div>
                 </WrapperInfo>
@@ -304,7 +301,7 @@ const PaymentPage = () => {
                     // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
                     onSuccess={onSuccessPaypal}
                     onError={() => {
-                      alert('Erroe')
+                      alert('Error')
                     }}
                   />
                 </div>
@@ -326,7 +323,7 @@ const PaymentPage = () => {
             </WrapperRight>
           </div>
         </div>
-        <ModalComponent title="Cập nhật thông tin giao hàng" open={isOpenModalUpdateInfo} onCancel={handleCancleUpdate} onOk={handleUpdateInforUser}>
+        <ModalComponent title="Cập nhật thông tin giao hàng" open={isOpenModalUpdateInfo} onCancel={handleCancelUpdate} onOk={handleUpdateInforUser}>
           <Loading isLoading={isLoading}>
           <Form
               name="basic"
@@ -343,19 +340,19 @@ const PaymentPage = () => {
               >
                 <InputComponent value={stateUserDetails['name']} onChange={handleOnchangeDetails} name="name" />
               </Form.Item>
-              <Form.Item
+              {/* <Form.Item
                 label="City"
                 name="city"
                 rules={[{ required: true, message: 'Please input your city!' }]}
               >
                 <InputComponent value={stateUserDetails['city']} onChange={handleOnchangeDetails} name="city" />
-              </Form.Item>
+              </Form.Item> */}
               <Form.Item
-                label="Phone"
-                name="phone"
-                rules={[{ required: true, message: 'Please input your  phone!' }]}
+                label="Sdt"
+                name="sdt"
+                rules={[{ required: true, message: 'Please input your  sdt!' }]}
               >
-                <InputComponent value={stateUserDetails.phone} onChange={handleOnchangeDetails} name="phone" />
+                <InputComponent value={stateUserDetails.sdt} onChange={handleOnchangeDetails} name="sdt" />
               </Form.Item>
 
               <Form.Item

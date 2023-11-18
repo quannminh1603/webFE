@@ -41,24 +41,24 @@ const MyOrderPage = () => {
     }
   )
 
-  const handleCanceOrder = (order) => {
+  const handleCancelOrder = (order) => {
     mutation.mutate({id : order._id, token:state?.token, orderItems: order?.orderItems, userId: user.id }, {
       onSuccess: () => {
         queryOrder.refetch()
       },
     })
   }
-  const { isLoading: isLoadingCancel, isSuccess: isSuccessCancel, isError: isErrorCancle, data: dataCancel } = mutation
+  const { isLoading: isLoadingCancel, isSuccess: isSuccessCancel, isError: isErrorCancel, data: dataCancel } = mutation
 
   useEffect(() => {
     if (isSuccessCancel && dataCancel?.status === 'OK') {
       message.success()
     } else if(isSuccessCancel && dataCancel?.status === 'ERR') {
       message.error(dataCancel?.message)
-    }else if (isErrorCancle) {
+    }else if (isErrorCancel) {
       message.error()
     }
-  }, [isErrorCancle, isSuccessCancel])
+  }, [isErrorCancel, isSuccessCancel])
 
   const renderProduct = (data) => {
     return data?.map((order) => {
@@ -78,8 +78,8 @@ const MyOrderPage = () => {
                 textOverflow:'ellipsis',
                 whiteSpace:'nowrap',
                 marginLeft: '10px'
-              }}>{order?.name}</div>
-              <span style={{ fontSize: '13px', color: '#242424',marginLeft: 'auto' }}>{convertPrice(order?.price)}</span>
+              }}>{order?.tenSanPham}</div>
+              <span style={{ fontSize: '13px', color: '#242424',marginLeft: 'auto' }}>{convertPrice(order?.donGia)}</span>
             </WrapperHeaderItem>
           })
   }
@@ -114,7 +114,7 @@ const MyOrderPage = () => {
                     </div>
                     <div style={{display: 'flex', gap: '10px'}}>
                     <ButtonComponent
-                        onClick={() => handleCanceOrder(order)}
+                        onClick={() => handleCancelOrder(order)}
                         size={40}
                         styleButton={{
                             height: '36px',

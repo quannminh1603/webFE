@@ -28,7 +28,7 @@ const DetailsOrderPage = () => {
 
   const priceMemo = useMemo(() => {
     const result = data?.orderItems?.reduce((total, cur) => {
-      return total + ((cur.price * cur.amount))
+      return total + ((cur.donGia * cur.amount))
     },0)
     return result
   },[data])
@@ -42,9 +42,9 @@ const DetailsOrderPage = () => {
           <WrapperInfoUser>
             <WrapperLabel>Địa chỉ người nhận</WrapperLabel>
             <WrapperContentInfo>
-              <div className='name-info'>{data?.shippingAddress?.fullName}</div>
-              <div className='address-info'><span>Địa chỉ: </span> {`${data?.shippingAddress?.address} ${data?.shippingAddress?.city}`}</div>
-              <div className='phone-info'><span>Điện thoại: </span> {data?.shippingAddress?.phone}</div>
+              <div className='name-info'>{data?.shippingAddress?.hoTenKH}</div>
+              <div className='address-info'><span>Địa chỉ: </span> {`${data?.shippingAddress?.diaChi}`}</div>
+              <div className='phone-info'><span>Điện thoại: </span> {data?.shippingAddress?.sdt}</div>
             </WrapperContentInfo>
           </WrapperInfoUser>
           <WrapperInfoUser>
@@ -73,7 +73,7 @@ const DetailsOrderPage = () => {
             return (
               <WrapperProduct>
                 <WrapperNameProduct>
-                  <img src={order?.image} 
+                  <img src={order?.hinhAnh} 
                     style={{
                       width: '70px', 
                       height: '70px', 
@@ -91,7 +91,7 @@ const DetailsOrderPage = () => {
                     height: '70px',
                   }}>Điện thoại</div>
                 </WrapperNameProduct>
-                <WrapperItem>{convertPrice(order?.price)}</WrapperItem>
+                <WrapperItem>{convertPrice(order?.donGia)}</WrapperItem>
                 <WrapperItem>{order?.amount}</WrapperItem>
                 <WrapperItem>{order?.discount ? convertPrice(priceMemo * order?.discount / 100) : '0 VND'}</WrapperItem>
                 

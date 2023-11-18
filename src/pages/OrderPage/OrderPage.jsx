@@ -26,10 +26,9 @@ const OrderPage = () => {
   const [listChecked, setListChecked] = useState([])
   const [isOpenModalUpdateInfo, setIsOpenModalUpdateInfo] = useState(false)
   const [stateUserDetails, setStateUserDetails] = useState({
-    name: '',
-    phone: '',
-    address: '',
-    city: ''
+    hoTenKH: '',
+    sdt: '',
+    diaChi: ''
   })
   const navigate = useNavigate()
   const [form] = Form.useForm();
@@ -83,10 +82,9 @@ const OrderPage = () => {
   useEffect(() => {
     if(isOpenModalUpdateInfo) {
       setStateUserDetails({
-        city: user?.city,
-        name: user?.name,
-        address: user?.address,
-        phone: user?.phone
+        hoTenKH: user?.hoTenKH,
+        diaChi: user?.diaChi,
+        sdt: user?.sdt
       })
     }
   }, [isOpenModalUpdateInfo])
@@ -97,15 +95,20 @@ const OrderPage = () => {
 
   const priceMemo = useMemo(() => {
     const result = order?.orderItemsSlected?.reduce((total, cur) => {
-      return total + ((cur.price * cur.amount))
+      return total + ((cur.donGia * cur.amount))
     },0)
     return result
   },[order])
+  console.log('priceMemo', priceMemo)
 
   const priceDiscountMemo = useMemo(() => {
     const result = order?.orderItemsSlected?.reduce((total, cur) => {
       const totalDiscount = cur.discount ? cur.discount : 0
-      return total + (priceMemo * (totalDiscount  * cur.amount) / 100)
+      console.log('priceMemo', priceMemo)
+      console.log('totalDiscount', totalDiscount)
+      console.log('cur.amount', cur.amount)
+      console.log('total + (priceMemo * (totalDiscount  * cur.amount) * 10/100)', total + (priceMemo * (totalDiscount  * cur.amount) * 10/100))
+      return total + (priceMemo * 0.1)
     },0)
     if(Number(result)){
       return result
@@ -124,7 +127,7 @@ const OrderPage = () => {
   },[priceMemo])
 
   const totalPriceMemo = useMemo(() => {
-    return Number(priceMemo) - Number(priceDiscountMemo) + Number(diliveryPriceMemo)
+    return Number(priceMemo) - (Number(priceDiscountMemo) + Number(diliveryPriceMemo))
   },[priceMemo,priceDiscountMemo, diliveryPriceMemo])
 
   const handleRemoveAllOrder = () => {
@@ -136,7 +139,7 @@ const OrderPage = () => {
   const handleAddCard = () => {
     if(!order?.orderItemsSlected?.length) {
       message.error('Vui lòng chọn sản phẩm')
-    }else if(!user?.phone || !user.address || !user.name || !user.city) {
+    }else if(!user?.sdt || !user.diaChi || !user.hoTenKH) {
       setIsOpenModalUpdateInfo(true)
     }else {
       navigate('/payment')
@@ -157,22 +160,22 @@ const OrderPage = () => {
 
   const {isLoading, data} = mutationUpdate
 
-  const handleCancleUpdate = () => {
+  const handleCancelUpdate = () => {
     setStateUserDetails({
-      name: '',
+      hoTenKH: '',
       email: '',
-      phone: '',
-      isAdmin: false,
+      sdt: '',
+      role: false,
     })
     form.resetFields()
     setIsOpenModalUpdateInfo(false)
   }
   const handleUpdateInforUser = () => {
-    const {name, address,city, phone} = stateUserDetails
-    if(name && address && city && phone){
+    const {hoTenKH, address,city, sdt} = stateUserDetails
+    if(hoTenKH && address && city && sdt){
       mutationUpdate.mutate({ id: user?.id, token: user?.access_token, ...stateUserDetails }, {
         onSuccess: () => {
-          dispatch(updateUser({name, address,city, phone}))
+          dispatch(updateUser({hoTenKH, address,city, sdt}))
           setIsOpenModalUpdateInfo(false)
         }
       })
@@ -182,7 +185,7 @@ const OrderPage = () => {
   const handleOnchangeDetails = (e) => {
     setStateUserDetails({
       ...stateUserDetails,
-      [e.target.name]: e.target.value
+      [e.target.hoTenKH]: e.target.value
     })
   }
   const itemsDelivery = [
@@ -229,28 +232,28 @@ const OrderPage = () => {
                   <WrapperItemOrder key={order?.product}>
                 <div style={{width: '390px', display: 'flex', alignItems: 'center', gap: 4}}> 
                   <CustomCheckbox onChange={onChange} value={order?.product} checked={listChecked.includes(order?.product)}></CustomCheckbox>
-                  <img src={order?.image} style={{width: '77px', height: '79px', objectFit: 'cover'}}/>
+                  <img src={order?.hinhAnh} style={{width: '77px', height: '79px', objectFit: 'cover'}}/>
                   <div style={{
                     width: 260,
                     overflow: 'hidden',
                     textOverflow:'ellipsis',
                     whiteSpace:'nowrap'
-                  }}>{order?.name}</div>
+                  }}>{order?.tenSanPham}</div>
                 </div>
                 <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                   <span>
-                    <span style={{ fontSize: '13px', color: '#242424' }}>{convertPrice(order?.price)}</span>
+                    <span style={{ fontSize: '13px', color: '#242424' }}>{convertPrice(order?.donGia)}</span>
                   </span>
                   <WrapperCountOrder>
                     <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('decrease',order?.product, order?.amount === 1)}>
                         <MinusOutlined style={{ color: '#000', fontSize: '10px' }} />
                     </button>
-                    <WrapperInputNumber defaultValue={order?.amount} value={order?.amount} size="small" min={1} max={order?.countInstock} />
-                    <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('increase',order?.product ,order?.amount === order.countInstock, order?.amount === 1)}>
+                    <WrapperInputNumber defaultValue={order?.amount} value={order?.amount} size="small" min={1} max={order?.soLuongConLai} />
+                    <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('increase',order?.product ,order?.amount === order.soLuongConLai, order?.amount === 1)}>
                         <PlusOutlined style={{ color: '#000', fontSize: '10px' }}/>
                     </button>
                   </WrapperCountOrder>
-                  <span style={{color: 'rgb(255, 66, 78)', fontSize: '13px', fontWeight: 500}}>{convertPrice(order?.price * order?.amount)}</span>
+                  <span style={{color: 'rgb(255, 66, 78)', fontSize: '13px', fontWeight: 500}}>{convertPrice(order?.donGia * order?.amount)}</span>
                   <DeleteOutlined style={{cursor: 'pointer'}} onClick={() => handleDeleteOrder(order?.product)}/>
                 </div>
               </WrapperItemOrder>
@@ -263,7 +266,7 @@ const OrderPage = () => {
               <WrapperInfo>
                 <div>
                   <span>Địa chỉ: </span>
-                  <span style={{fontWeight: 'bold'}}>{ `${user?.address} ${user?.city}`} </span>
+                  <span style={{fontWeight: 'bold'}}>{ `${user?.diaChi}` } </span>
                   <span onClick={handleChangeAddress} style={{color: '#9255FD', cursor:'pointer'}}>Thay đổi</span>
                 </div>
               </WrapperInfo>
@@ -305,7 +308,7 @@ const OrderPage = () => {
           </WrapperRight>
         </div>
       </div>
-      <ModalComponent title="Cập nhật thông tin giao hàng" open={isOpenModalUpdateInfo} onCancel={handleCancleUpdate} onOk={handleUpdateInforUser}>
+      <ModalComponent title="Cập nhật thông tin giao hàng" open={isOpenModalUpdateInfo} onCancel={handleCancelUpdate} onOk={handleUpdateInforUser}>
         <Loading isLoading={isLoading}>
         <Form
             name="basic"
@@ -317,32 +320,32 @@ const OrderPage = () => {
           >
             <Form.Item
               label="Name"
-              name="name"
+              name="hoTenKH"
               rules={[{ required: true, message: 'Please input your name!' }]}
             >
               <InputComponent value={stateUserDetails['name']} onChange={handleOnchangeDetails} name="name" />
             </Form.Item>
-            <Form.Item
+            {/* <Form.Item
               label="City"
               name="city"
               rules={[{ required: true, message: 'Please input your city!' }]}
             >
               <InputComponent value={stateUserDetails['city']} onChange={handleOnchangeDetails} name="city" />
-            </Form.Item>
+            </Form.Item> */}
             <Form.Item
-              label="Phone"
-              name="phone"
-              rules={[{ required: true, message: 'Please input your  phone!' }]}
+              label="Sdt"
+              name="sdt"
+              rules={[{ required: true, message: 'Please input your  sdt!' }]}
             >
-              <InputComponent value={stateUserDetails.phone} onChange={handleOnchangeDetails} name="phone" />
+              <InputComponent value={stateUserDetails.sdt} onChange={handleOnchangeDetails} name="sdt" />
             </Form.Item>
 
             <Form.Item
-              label="Adress"
-              name="address"
-              rules={[{ required: true, message: 'Please input your  address!' }]}
+              label="DiaChi"
+              name="diaChi"
+              rules={[{ required: true, message: 'Please input your  diaChi!' }]}
             >
-              <InputComponent value={stateUserDetails.address} onChange={handleOnchangeDetails} name="address" />
+              <InputComponent value={stateUserDetails.diaChi} onChange={handleOnchangeDetails} name="diaChi" />
             </Form.Item>
           </Form>
         </Loading>
