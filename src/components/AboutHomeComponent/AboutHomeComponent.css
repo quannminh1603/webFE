@@ -1,0 +1,82 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 60px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 80px;
+}
+
+.grid-2 .mt40px {
+    /* margin-top: 40px; */
+}
+
+.grid-2 .col-2 p {
+    color: #000;
+}
+
+.grid-2 .col-2 h1 {
+    font-size: 50px;
+    font-weight: normal;
+    margin-bottom: 24px;
+}
+
+.grid-2 .col-2 .content {
+    font-style: italic;
+    margin-bottom: 40px;
+}
+
+.grid-2 .col-2 .phone {
+    width: 40%;
+    margin-left: 80px;
+}
+
+.grid-2 .col-2 .phone .contentPhone,
+.grid-2 .col-2 .content {
+    font-size: 18px;
+}
+
+.grid-2 .col-2 .phone .contentPhone {
+    font-style: italic;
+}
+
+.phoneIcon {
+    float: left;
+    margin-top: 8px;
+    background-color: #F4F0EC;
+    padding: 30px;
+    margin-right: 20px;
+    border-radius: 100%;
+    font-size: 40px;
+    box-shadow: -3.5px 4px 6px 0px #ccc;
+}
+
+.phoneIcon path {
+    color: #FF9E5E;
+}
+
+.grid-2 .col-2 a button {
+    margin-top: 40px;
+    background-color: #292F36;
+    border: none;
+    color: #fff;
+}
+
+.grid-2 .col-2 a {
+    padding: 16px 32px;
+    background-color: #292F36;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+}
+
+.grid-2 .col-2 img {
+    border-top-right-radius: 40%;
+    border-bottom-left-radius: 40%;
+}
