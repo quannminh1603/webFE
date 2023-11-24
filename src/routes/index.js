@@ -102,6 +102,9 @@ import ProfilePage from "../pages/Profile/ProfilePage";
 import SignInPage from "../pages/SignInPage/SignInPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import TypeProductPage from "../pages/TypeProductPage/TypeProductPage";
+import NikeProducts from "../pages/NikeProducts/NikeProducts";
+import AdidasProducts from "../pages/AdidasProducts/AdidasProducts";
+import MlbProducts from "../pages/MlbProducts/MlbProducts";
 
 export const routes = [
     {
@@ -142,6 +145,21 @@ export const routes = [
     {
         path: '/products',
         page: ProductsPage,
+        isShowHeader: true
+    },
+    {
+        path: '/nikeproducts',
+        page: NikeProducts,
+        isShowHeader: true
+    },
+    {
+        path: '/adidasproducts',
+        page: AdidasProducts,
+        isShowHeader: true
+    },
+    {
+        path: '/mlb',
+        page: MlbProducts,
         isShowHeader: true
     },
     {

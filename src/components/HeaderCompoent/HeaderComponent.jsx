@@ -333,7 +333,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
           <div className="select_nav_mid">
             <ul className="select_menu">
               <li className="listGiay">
-                <a href="/contact">Giày</a>
+                <a href="/contact">Sản phẩm</a>
                 <div className="menuc2">
                   <div className="grid-3">
                     <div>
@@ -358,7 +358,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                     </div>
                     <div>
                       <ul>
-                        <li><a style={{ fontWeight: "bold" }} href="/shoesproducts">Giày leo núi</a></li>
+                        <li><a style={{ fontWeight: "bold" }} href="/mlb">Giày MLB</a></li>
                         {/* <li><a href="#">Adidas</a></li>
                       <li><a href="#">MLB</a></li>
                       <li><a href="#">Asic</a></li>
@@ -385,7 +385,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                 <a style={{ color: "red", fontWeight: "bold" }} href="/detail">SALE</a>
               </li>
               <li>
-                <a style={{ marginLeft: "200px" }} href="/about">Về chúng tôi</a>
+                <a style={{ marginLeft: "100px" }} href="/about">Về chúng tôi</a>
               </li>
             </ul>
           </div>
