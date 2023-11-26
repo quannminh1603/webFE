@@ -112,6 +112,8 @@ import * as UserService from './services/UserService'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetUser, updateUser } from './redux/slides/userSlide'
 import Loading from './components/LoadingComponent/Loading'
+import CategoryDetail from "./pages/AdminPage/Category/Detail/CategoryDetail";
+import CategoryList from "./pages/AdminPage/Category/CategoryList";
 
 function App() {
   const dispatch = useDispatch();

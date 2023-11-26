@@ -1,0 +1,11 @@
+/* Category.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-wrapper {
+    margin-bottom: 10px; /* Adjust this for spacing between inputs */
+}

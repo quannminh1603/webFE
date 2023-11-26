@@ -105,6 +105,8 @@ import TypeProductPage from "../pages/TypeProductPage/TypeProductPage";
 import NikeProducts from "../pages/NikeProducts/NikeProducts";
 import AdidasProducts from "../pages/AdidasProducts/AdidasProducts";
 import MlbProducts from "../pages/MlbProducts/MlbProducts";
+import CategoryList from "../pages/AdminPage/Category/CategoryList";
+import CategoryDetail from "../pages/AdminPage/Category/Detail/CategoryDetail";
 
 export const routes = [
     {
@@ -194,7 +196,25 @@ export const routes = [
         isPrivated: true
     },
     {
+        path: '/system/admin/category',
+        page: CategoryList,
+        isShowHeader: false,
+        isPrivated: true
+    },
+    {
+        path: '/system/admin/category/new',
+        page: CategoryDetail,
+        isShowHeader: false,
+        isPrivated: true
+    },
+    {
+        path: '/system/admin/category/:id',
+        page: CategoryDetail,
+        isShowHeader: false,
+        isPrivated: true
+    },
+    {
         path: '*',
         page: NotFoundPage
-    }
+    },
 ]
