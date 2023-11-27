@@ -28,32 +28,28 @@ import { convertPrice } from '../../utils'
 import DanhmucDetail from "../../pages/ProductDetailsPage/DanhmucDetail/DanhmucDetail";
 
 const MlbProductsComponent = (props) => {
-    const { countInStock, description, image, name, price, rating, type, discount, selled, id } = props
-    const navigate = useNavigate()
-    const handleDetailsProduct = (id) => {
-        navigate(`/product-details/${id}`);
+  const { countInStock, description, image, name, price, rating, type, discount, selled, id } = props
+  const navigate = useNavigate()
+  const handleDetailsProduct = (id) => {
+    navigate(`/product-details/${id}`);
   }
-    return (
-        <>
-            <article className="product_mlb">
+  return (
+    <>
+      <article className="product_mlb">
           <div className="slect_product_mlb">
-            <div className="product_img_mlb">
-              <img onChange={handleDetailsProduct} alt="example" src={image} />
+            <div onClick={() => {handleDetailsProduct(id)}} className="product_img_mlb">
+              <img alt="example" src={image} />
               <a><FontAwesomeIcon className="cartIcon" icon={faCartPlus} style={{color: "#fff",}} /></a>
             </div>
             <div className="product_name_mlb">
-              <p className="name_mlb">{name}</p>
-              <FontAwesomeIcon icon={faStar} className="starIcon" style={{color: "#fbff00",}} />
-              <FontAwesomeIcon icon={faStar} className="starIcon" style={{color: "#fbff00",}} />
-              <FontAwesomeIcon icon={faStar} className="starIcon" style={{color: "#fbff00",}} />
-              <FontAwesomeIcon icon={faStar} className="starIcon" style={{color: "#fbff00",}} />
-              <FontAwesomeIcon icon={faStar} className="starIcon" style={{color: "#fbff00",}} />
-              <div className="price_mlb">{price}</div>
+              <p onClick={() => {handleDetailsProduct(id)}} className="name_mlb">{name}</p>
+              {rating}<FontAwesomeIcon icon={faStar} className="starIcon" style={{color: "#fbff00",}} />
+              <div className="price_mlb">{price}<u>đ</u></div>
             </div>
           </div>
     </article>
-        </>
-    );
+    </>
+  );
 }
 
 export default MlbProductsComponent;

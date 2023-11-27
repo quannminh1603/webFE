@@ -23,18 +23,14 @@ const ListProductNike = (props) => {
   return (
     <article className="product_nike">
           <div className="slect_product_nike">
-            <div className="product_img_nike">
-              <img onChange={handleDetailsProduct} alt="example" src={image} />
+            <div onClick={() => {handleDetailsProduct(id)}} className="product_img_nike">
+              <img alt="example" src={image} />
               <a><FontAwesomeIcon className="cartIcon" icon={faCartPlus} style={{color: "#fff",}} /></a>
             </div>
             <div className="product_name_nike">
-              <p className="name_nike">{name}</p>
-              <FontAwesomeIcon icon={faStar} className="starIcon" style={{color: "#fbff00",}} />
-              <FontAwesomeIcon icon={faStar} className="starIcon" style={{color: "#fbff00",}} />
-              <FontAwesomeIcon icon={faStar} className="starIcon" style={{color: "#fbff00",}} />
-              <FontAwesomeIcon icon={faStar} className="starIcon" style={{color: "#fbff00",}} />
-              <FontAwesomeIcon icon={faStar} className="starIcon" style={{color: "#fbff00",}} />
-              <div className="price_nike">{price}</div>
+              <p onClick={() => {handleDetailsProduct(id)}} className="name_nike">{name}</p>
+              {rating}<FontAwesomeIcon icon={faStar} className="starIcon" style={{color: "#fbff00",}} />
+              <div className="price_nike">{price}<u>đ</u></div>
             </div>
           </div>
     </article>

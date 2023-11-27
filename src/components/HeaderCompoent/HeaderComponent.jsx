@@ -404,7 +404,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
               //     <CaretDownOutlined />
               //   </div>
               // </div>
-              <a href="/login">
+              <a href="/sign-in">
                 <PersonOutlineOutlinedIcon className="icon" />
               </a>
             )}
@@ -445,9 +445,19 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
               </Space>
 
             </div>
-            <a href="/cart">
+            {!isHiddenCart && (
+            <div onClick={() => navigate('/order')} style={{cursor: 'pointer'}}>
+              <Badge count={order?.orderItems?.length} size="small">
+                <ShoppingCartOutlinedIcon className="icon" />
+              </Badge>
+              {/* <a href="/order">
+              Giỏ hàng
+            </a> */}
+            </div>
+          )}
+            {/* <a href="/cart">
               <ShoppingCartOutlinedIcon className="icon" />
-            </a>
+            </a> */}
           </div>
         </nav>
       </div>

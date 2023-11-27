@@ -268,10 +268,6 @@ const SignInPage = () => {
           <p><WrapperTextLight>Quên mật khẩu?</WrapperTextLight></p>
           <p>Chưa có tài khoản? <WrapperTextLight onClick={handleNavigateSignUp}> Tạo tài khoản</WrapperTextLight></p>
         </WrapperContainerLeft>
-        <WrapperContainerRight>
-          <Image src={imageLogo} preview={false} alt="iamge-logo" height="203px" width="203px" />
-          <h4>Mua sắm tại LTTD</h4>
-        </WrapperContainerRight>
       </div>
     </div >
   )

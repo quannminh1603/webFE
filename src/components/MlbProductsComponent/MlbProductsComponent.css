@@ -94,6 +94,10 @@ article {
   font-size: 20px;
 }
 
+.mlb_products_page .list_items_mlb .product_mlb .slect_product_mlb .product_name_mlb .name_mlb:hover {
+  cursor: pointer;
+}
+
 .mlb_products_page .list_items_mlb .product_mlb .slect_product_mlb .product_name_mlb .name_mlb .starIcon path {
   color: yellow;
 }

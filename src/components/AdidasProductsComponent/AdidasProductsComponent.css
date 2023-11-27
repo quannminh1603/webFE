@@ -88,6 +88,10 @@ article {
   color: #fff;
 }
 
+.name_adidas:hover {
+  cursor: pointer;
+}
+
 .adidas_products_page .list_items_adidas .product_adidas .slect_product_adidas .product_name_adidas .name_adidas {
   color: #000;
   font-weight: bold;

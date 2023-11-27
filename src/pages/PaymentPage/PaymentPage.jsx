@@ -407,8 +407,7 @@ const PaymentPage = () => {
   const [stateUserDetails, setStateUserDetails] = useState({
     name: '',
     phone: '',
-    address: '',
-    city: ''
+    address: ''
   })
   const [form] = Form.useForm();
 
@@ -422,7 +421,6 @@ const PaymentPage = () => {
   useEffect(() => {
     if(isOpenModalUpdateInfo) {
       setStateUserDetails({
-        city: user?.city,
         name: user?.name,
         address: user?.address,
         phone: user?.phone
@@ -453,12 +451,12 @@ const PaymentPage = () => {
   },[order])
 
   const diliveryPriceMemo = useMemo(() => {
-    if(priceMemo > 200000){
-      return 10000
-    }else if(priceMemo === 0 ){
+    if(priceMemo < 200000){
+      return 20000
+    }else if(priceMemo >= 500000 || order?.orderItemsSlected?.length === 0){
       return 0
     }else {
-      return 20000
+      return 10000
     }
   },[priceMemo])
 
@@ -468,7 +466,7 @@ const PaymentPage = () => {
 
   const handleAddOrder = () => {
     if(user?.access_token && order?.orderItemsSlected && user?.name
-      && user?.address && user?.phone && user?.city && priceMemo && user?.id) {
+      && user?.address && user?.phone && priceMemo && user?.id) {
         // eslint-disable-next-line no-unused-expressions
         mutationAddOrder.mutate(
           { 
@@ -477,7 +475,6 @@ const PaymentPage = () => {
             fullName: user?.name,
             address:user?.address, 
             phone:user?.phone,
-            city: user?.city,
             paymentMethod: payment,
             itemsPrice: priceMemo,
             shippingPrice: diliveryPriceMemo,
@@ -555,7 +552,6 @@ const PaymentPage = () => {
         fullName: user?.name,
         address:user?.address, 
         phone:user?.phone,
-        city: user?.city,
         paymentMethod: payment,
         itemsPrice: priceMemo,
         shippingPrice: diliveryPriceMemo,
@@ -570,11 +566,11 @@ const PaymentPage = () => {
 
 
   const handleUpdateInforUser = () => {
-    const {name, address,city, phone} = stateUserDetails
-    if(name && address && city && phone){
+    const {name, address, phone} = stateUserDetails
+    if(name && address && phone){
       mutationUpdate.mutate({ id: user?.id, token: user?.access_token, ...stateUserDetails }, {
         onSuccess: () => {
-          dispatch(updateUser({name, address,city, phone}))
+          dispatch(updateUser({name, address, phone}))
           setIsOpenModalUpdateInfo(false)
         }
       })
@@ -596,16 +592,17 @@ const PaymentPage = () => {
   }
 
   const addPaypalScript = async () => {
-    const { data } = await PaymentService.getConfig()
-    console.log('PaymentService.getConfig()', PaymentService.getConfig())
+    const data = await PaymentService.getConfig()
+    console.log('PaymentService.getConfig()', data)
     const script = document.createElement('script')
     script.type = 'text/javascript'
     script.src = `https://www.paypal.com/sdk/js?client-id=${data}`
     script.async = true;
     script.onload = () => {
-      setSdkReady(true)
+      setSdkReady(true) 
     }
     document.body.appendChild(script)
+    console.log('sdkReady', sdkReady)
   }
 
   useEffect(() => {
@@ -647,7 +644,7 @@ const PaymentPage = () => {
                 <WrapperInfo>
                   <div>
                     <span>Địa chỉ: </span>
-                    <span style={{fontWeight: 'bold'}}>{ `${user?.address} ${user?.city}`} </span>
+                    <span style={{fontWeight: 'bold'}}>{ `${user?.address}`} </span>
                     <span onClick={handleChangeAddress} style={{color: '#9255FD', cursor:'pointer'}}>Thay đổi</span>
                   </div>
                 </WrapperInfo>
@@ -673,14 +670,14 @@ const PaymentPage = () => {
                   </span>
                 </WrapperTotal>
               </div>
-              {payment === 'paypal' && sdkReady ? (
+              {payment === 'paypal' && setSdkReady ? (
                 <div style={{width: '320px'}}>
                   <PayPalButton
-                    amount={Math.round(totalPriceMemo / 30000)}
+                    amount={Math.round(totalPriceMemo / 100000)}
                     // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
                     onSuccess={onSuccessPaypal}
                     onError={() => {
-                      alert('Erroe')
+                      alert('Error')
                     }}
                   />
                 </div>
@@ -719,13 +716,7 @@ const PaymentPage = () => {
               >
                 <InputComponent value={stateUserDetails['name']} onChange={handleOnchangeDetails} name="name" />
               </Form.Item>
-              <Form.Item
-                label="City"
-                name="city"
-                rules={[{ required: true, message: 'Please input your city!' }]}
-              >
-                <InputComponent value={stateUserDetails['city']} onChange={handleOnchangeDetails} name="city" />
-              </Form.Item>
+              
               <Form.Item
                 label="Phone"
                 name="phone"

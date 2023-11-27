@@ -167,7 +167,7 @@ const DetailsOrderPage = () => {
             <WrapperLabel>Địa chỉ người nhận</WrapperLabel>
             <WrapperContentInfo>
               <div className='name-info'>{data?.shippingAddress?.fullName}</div>
-              <div className='address-info'><span>Địa chỉ: </span> {`${data?.shippingAddress?.address} ${data?.shippingAddress?.city}`}</div>
+              <div className='address-info'><span>Địa chỉ: </span> {`${data?.shippingAddress?.address}`}</div>
               <div className='phone-info'><span>Điện thoại: </span> {data?.shippingAddress?.phone}</div>
             </WrapperContentInfo>
           </WrapperInfoUser>

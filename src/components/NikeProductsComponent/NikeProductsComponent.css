@@ -103,6 +103,10 @@ article {
   font-size: 20px;
 }
 
+.name_nike:hover {
+  cursor: pointer;
+}
+
 .soluong_products {
     color: #000;
     margin-left: 2.5%;

@@ -23,14 +23,14 @@ const ListProductMlb = (props) => {
   return (
     <article className="product_mlb">
           <div className="slect_product_mlb">
-            <div className="product_img_mlb">
-              <img onChange={handleDetailsProduct} alt="example" src={image} />
+            <div onClick={() => {handleDetailsProduct(id)}} className="product_img_mlb">
+              <img alt="example" src={image} />
               <a><FontAwesomeIcon className="cartIcon" icon={faCartPlus} style={{color: "#fff",}} /></a>
             </div>
             <div className="product_name_mlb">
-              <p className="name_mlb">{name}</p>
+              <p onClick={() => {handleDetailsProduct(id)}} className="name_mlb">{name}</p>
               {rating}<FontAwesomeIcon icon={faStar} className="starIcon" style={{color: "#fbff00",}} />
-              <div className="price_mlb">{price}</div>
+              <div className="price_mlb">{price}<u>đ</u></div>
             </div>
           </div>
     </article>

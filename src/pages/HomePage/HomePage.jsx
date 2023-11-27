@@ -150,7 +150,7 @@ const HomePage = () => {
   return (
     <>
       <Loading isLoading={isLoading || loading}>
-      <div className='body' style={{ marginTop: "92px" }}>
+      <div className='body'>
         <div id="container">
           <Navbar />
           <AboutHomeComponent />

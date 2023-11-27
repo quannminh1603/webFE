@@ -381,7 +381,7 @@ const ProductDetailsComponent = ({idProduct}) => {
                             } 
                     />
                     <div style={{ margin: '10px 0 20px', padding: '10px 0', borderTop: '1px solid #e5e5e5', borderBottom: '1px solid #e5e5e5' }}>
-                        <div style={{ marginBottom: '10px' }}>Số lượng:</div>
+                        <div style={{ marginBottom: '10px' }}>Số lượng: {productDetails?.countInStock}</div>
                         <WrapperQualityProduct>
                             <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('decrease',numProduct === 1)}>
                                 <MinusOutlined style={{ color: '#000', fontSize: '20px' }} />

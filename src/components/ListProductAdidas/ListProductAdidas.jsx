@@ -30,7 +30,7 @@ const ListProductAdidas = (props) => {
             <div className="product_name_adidas">
               <p onClick={() => {handleDetailsProduct(id)}} className="name_adidas">{name}</p>
               {rating}<FontAwesomeIcon icon={faStar} className="starIcon" style={{color: "#fbff00",}} />
-              <div className="price_adidas">{price}</div>
+              <div className="price_adidas">{price}<u>đ</u></div>
             </div>
           </div>
     </article>

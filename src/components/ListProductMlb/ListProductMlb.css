@@ -154,6 +154,10 @@ article {
   color: #fff;
 }
 
+.name_mlb:hover {
+  cursor: pointer;
+}
+
 .name_mlb {
   color: #000;
   font-weight: bold;

@@ -157,12 +157,35 @@ const SignUpPage = () => {
 
   const [isShowPassword, setIsShowPassword] = useState(false)
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false)
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState('');
+
+  const handleOnchangeName = (value) => {
+    setName(value)
+  }
 
   const handleOnchangeEmail = (value) => {
     setEmail(value)
+  }
+  
+  const handleOnchangePassword = (value) => {
+    setPassword(value)
+  }
+
+  const handleOnchangeConfirmPassword = (value) => {
+    setConfirmPassword(value)
+  }
+
+  const handleOnchangePhone = (value) => {
+    setPhone(value)
+  }
+
+  const handleOnchangeAddress = (value) => {
+    setAddress(value)
   }
 
   const mutation = useMutationHooks(
@@ -180,20 +203,13 @@ const SignUpPage = () => {
     }
   }, [isSuccess, isError])
 
-  const handleOnchangePassword = (value) => {
-    setPassword(value)
-  }
-
-  const handleOnchangeConfirmPassword = (value) => {
-    setConfirmPassword(value)
-  }
 
   const handleNavigateSignIn = () => {
     navigate('/sign-in')
   }
 
   const handleSignUp = () => {
-    mutation.mutate({ email, password, confirmPassword })
+    mutation.mutate({ name, email, password, confirmPassword, phone, address })
   }
 
   return (
@@ -202,6 +218,7 @@ const SignUpPage = () => {
         <WrapperContainerLeft>
           <h1>Xin chào</h1>
           <p>Đăng nhập vào tạo tài khoản</p>
+          <InputForm style={{ marginBottom: '10px' }} placeholder="Name" value={name} onChange={handleOnchangeName} />
           <InputForm style={{ marginBottom: '10px' }} placeholder="abc@gmail.com" value={email} onChange={handleOnchangeEmail} />
           <div style={{ position: 'relative' }}>
             <span
@@ -244,6 +261,9 @@ const SignUpPage = () => {
               value={confirmPassword} onChange={handleOnchangeConfirmPassword}
             />
           </div>
+          <InputForm style={{ marginBottom: '10px' }} placeholder="Phone" value={phone} onChange={handleOnchangePhone} />
+          <InputForm style={{ marginBottom: '10px' }} placeholder="Address" value={address} onChange={handleOnchangeAddress} />
+
           {data?.status === 'ERR' && <span style={{ color: 'red' }}>{data?.message}</span>}
           <Loading isLoading={isLoading}>
             <ButtonComponent
@@ -264,10 +284,6 @@ const SignUpPage = () => {
           </Loading>
           <p>Bạn đã có tài khoản? <WrapperTextLight onClick={handleNavigateSignIn}> Đăng nhập</WrapperTextLight></p>
         </WrapperContainerLeft>
-        <WrapperContainerRight>
-          <Image src={imageLogo} preview={false} alt="iamge-logo" height="203px" width="203px" />
-          <h4>Mua sắm tại LTTD</h4>
-        </WrapperContainerRight>
       </div>
     </div >
   )
