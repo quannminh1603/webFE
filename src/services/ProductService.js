@@ -63,14 +63,20 @@
 
 // test
 import axios from "axios"
-import { axiosJWT } from "./UserService"
+import {axiosJWT} from "./UserService"
 
-export const getAllProduct = async (search, limit) => {
+export const getAllProduct = async (search, limit, type) => {
+    if (!limit) {
+        limit = 10
+    }
+    if (!search) {
+        search = ''
+    }
     let res = {}
     if (search?.length > 0) {
-        res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-all?filter=name&filter=${search}&limit=${limit}`)
+        res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-all?filter=name&filter=${search}&limit=${limit}&type=${type}`)
     } else {
-        res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-all?limit=${limit}`)
+        res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-all?limit=${limit}&type=${type}`)
     }
     return res.data
 }

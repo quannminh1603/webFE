@@ -18,13 +18,13 @@ const AdidasProducts = () => {
     const searchDebounce = useDebounce(searchProduct, 500)
     const [loading, setLoading] = useState(false)
     const [limit, setLimit] = useState(8)
+    const [type, setType] = useState('adidas')
     const [typeProducts, setTypeProducts] = useState([])
   
     const fetchProductAll = async (context) => {
       const limit = context?.queryKey && context?.queryKey[1]
       const search = context?.queryKey && context?.queryKey[2]
-      const res = await ProductService.getAllProduct(search, limit)
-  
+      const res = await ProductService.getAllProduct(search, limit, type)
       return res
   
     }
@@ -47,11 +47,10 @@ const AdidasProducts = () => {
             <Loading isLoading={isLoading || loading}>
                 
         <DanhmucDetail />
-            <div style={{marginBottom: "80px"}} className="list_product_adidas">
+            <div style={{marginBottom: "80px"}} className="list_product_adidas row">
             <h1>Giày Adidas</h1>
-            <div className="list_items_adidas">
+            <div className="list_items_adidas row">
                 {products?.data?.map((product) => {
-                  if (product.type == "Giày Adidas")
                     return (
                       <AdidasProductsComponent
                         key={product._id}
