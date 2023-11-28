@@ -36,7 +36,7 @@ const CategoryList = () => {
     return (
         <div className="container">
             <h2>Danh sách danh mục</h2>
-            <div style={{display :"flex" }}>
+            <div className={"d-flex"}>
                 <Link to="new">
                     <button>
                         <PlusOutlined /> Thêm mới

@@ -149,6 +149,24 @@ export const renderOptions = (arr) => {
     return results
 }
 
+export const renderOptionsCategory = (arr) => {
+    let results = []
+    if(arr) {
+        results = arr?.map((opt) => {
+            return {
+                value: opt?._id,
+                label: opt?.ten,
+            }
+        })
+    }
+    results.push({
+        label: 'Thêm danh mục',
+        value: 'add_category'
+    })
+    console.log('results', results)
+    return results
+}
+
 export const convertPrice = (price) => {
     try {
         const result  = price?.toLocaleString().replaceAll(',', '.')
