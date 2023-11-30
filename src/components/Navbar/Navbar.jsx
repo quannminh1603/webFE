@@ -8,7 +8,7 @@ import thumb3 from "../../assets/images/anh3.jpg";
 const Navbar = () => {
   return (
     <div className="banner slide">
-      <div className="carousel-item active">
+      <div className="carousel-itemm active">
         <img src={banner} alt="" />
         <div className="title">
           <h1>Mua sắm đồ dụng cụ thể thao ở Firefly</h1>

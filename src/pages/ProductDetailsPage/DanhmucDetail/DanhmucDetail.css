@@ -5,10 +5,9 @@
 }
 
 .menuDetail {
+    position: relative;
     width: 100%;
     box-shadow: 0.5px 0px 3px 0px #5c5c5c;
-    margin-top: 40px;
-    /* padding: 20px 0; */
     height: 80px;
 }
 
@@ -20,16 +19,20 @@
 .menuDetail ul li {
     display: inline-block;
     margin-top: 19px;
+   
+
 }
 
 .menuDetail ul li a {
     display: block;
     line-height: 40px;
     padding: 0 20px;
-    border: 1px solid #000;
+    border: 1px solid #240404;
     margin-left: 20px;
     margin-right: 20px;
     font-size: 14px;
+    text-decoration: none;
+
 }
 
 .icon-down-danhmucDetail {
@@ -38,12 +41,14 @@
 
 .register-danhmucDetail {
     width: 100%;
+    position: relative;
     text-align: center;
     background-color: #151414;
     color: #fff;
     /* margin-top: 92px; */
     padding: 12px 0;
     padding-top: 18px;
+    z-index: 1;
 }
 
 .register-danhmucDetail .text {

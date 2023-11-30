@@ -10,6 +10,8 @@ import adidasHome5 from "../../assets/images/adidasHome5.jpg"
 import adidasHome6 from "../../assets/images/adidasHome6.jpg"
 import adidasHome7 from "../../assets/images/adidasHome7.jpg"
 import adidasHome8 from "../../assets/images/adidasHome8.jpg"
+import {formatMoney} from '../../utils'
+import StarRatingComponent from '../StarRating/StarRatingComponent';
 
 import Pagination from "@mui/material/Pagination";
 
@@ -43,8 +45,10 @@ const NikeProductsComponent = (props) => {
           </div>
           <div className="product_name_nike">
             <p onClick={() => { handleDetailsProduct(id) }} className="name_nike">{name}</p>
-            {rating}<FontAwesomeIcon icon={faStar} className="starIcon" style={{ color: "#fbff00", }} />
-            <div className="price_nike">{price}<u>đ</u></div>
+            <div className="rating_adidas">
+                            <StarRatingComponent rating={rating}/>
+                        </div>
+              <div className="price_mlb">{formatMoney(price)}</div>
           </div>
         </div>
       </article>

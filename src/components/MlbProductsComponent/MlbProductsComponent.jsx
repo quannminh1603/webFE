@@ -10,22 +10,24 @@ import adidasHome5 from "../../assets/images/adidasHome5.jpg"
 import adidasHome6 from "../../assets/images/adidasHome6.jpg"
 import adidasHome7 from "../../assets/images/adidasHome7.jpg"
 import adidasHome8 from "../../assets/images/adidasHome8.jpg"
+import {formatMoney} from '../../utils'
 
 import Pagination from "@mui/material/Pagination";
 
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 
-import CardComponent from '../../components/CardComponent/CardComponent'
+import CardComponent from '../CardComponent/CardComponent'
 import { useQuery } from '@tanstack/react-query'
 import * as ProductService from '../../services/ProductService'
 import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
-import Loading from '../../components/LoadingComponent/Loading'
+import Loading from '../LoadingComponent/Loading'
 import { useDebounce } from '../../hooks/useDebounce'
 import { useNavigate } from 'react-router-dom'
 import { convertPrice } from '../../utils'
 import DanhmucDetail from "../../pages/ProductDetailsPage/DanhmucDetail/DanhmucDetail";
+import StarRatingComponent from '../StarRating/StarRatingComponent';
 
 const MlbProductsComponent = (props) => {
   const { countInStock, description, image, name, price, rating, type, discount, selled, id } = props
@@ -43,8 +45,10 @@ const MlbProductsComponent = (props) => {
             </div>
             <div className="product_name_mlb">
               <p onClick={() => {handleDetailsProduct(id)}} className="name_mlb">{name}</p>
-              {rating}<FontAwesomeIcon icon={faStar} className="starIcon" style={{color: "#fbff00",}} />
-              <div className="price_mlb">{price}<u>đ</u></div>
+              <div className="rating_adidas">
+                            <StarRatingComponent rating={rating}/>
+                        </div>
+              <div className="price_mlb">{formatMoney(price)}</div>
             </div>
           </div>
     </article>

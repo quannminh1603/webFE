@@ -93,7 +93,7 @@ const HeaderMenuComponent = () => {
           <div className="search">
             <SearchIcon
               style={{
-                // position: "absolute",
+                position: "relative",
                 // top: "10px",
                 // right: "10px",
                 color: "#3C3C43",
