@@ -593,7 +593,6 @@ const PaymentPage = () => {
 
   const addPaypalScript = async () => {
     const data = await PaymentService.getConfig()
-    console.log('PaymentService.getConfig()', data)
     const script = document.createElement('script')
     script.type = 'text/javascript'
     script.src = `https://www.paypal.com/sdk/js?client-id=${data}`
@@ -602,7 +601,6 @@ const PaymentPage = () => {
       setSdkReady(true) 
     }
     document.body.appendChild(script)
-    console.log('sdkReady', sdkReady)
   }
 
   useEffect(() => {

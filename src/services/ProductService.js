@@ -63,23 +63,28 @@
 
 // test
 import axios from "axios"
-import {axiosJWT} from "./UserService"
+import { axiosJWT } from "./UserService"
 
-export const getAllProduct = async (search, limit, type) => {
-    if (!limit) {
-        limit = 10
-    }
-    if (!search) {
-        search = ''
-    }
+export const getAllProduct = async (search, limit) => {
     let res = {}
     if (search?.length > 0) {
-        res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-all?filter=name&filter=${search}&limit=${limit}&type=${type}`)
+        res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-all?filter=name&filter=${search}&limit=${limit}`)
     } else {
-        res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-all?limit=${limit}&type=${type}`)
+        res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-all?limit=${limit}`)
     }
     return res.data
 }
+
+export const getAllProductByType = async (search, limit , type ) => {
+    let res = {}
+    if (type) {
+        res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-all-by-type?filter=name&filter=${search}&limit=${limit}&type=${type}`)
+    } else {
+        res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-all-by-type?filter=name&filter=${search}&limit=${limit}`)
+    }
+    return res.data
+}
+
 
 export const getProductType = async (type, page, limit) => {
     if (type) {

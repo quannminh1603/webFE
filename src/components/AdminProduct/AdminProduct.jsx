@@ -1153,9 +1153,18 @@ const AdminProduct = () => {
     }
 
     const handleOnchangeDetails = (e) => {
+        if (e && e.target && e.target.name) {
+            setStateProductDetails({
+                ...stateProductDetails,
+                [e.target.name]: e.target.value
+            });
+        }
+    }
+
+    const handleOnchangeDetailsType = (e) => {
         setStateProductDetails({
             ...stateProductDetails,
-            type: typeProduct?.data?.data?.find((item) => item._id === e?.value)
+            type: typeProduct?.data?.data?.find((item) => item._id === e.value)
         })
     }
 
@@ -1207,7 +1216,6 @@ const AdminProduct = () => {
             value: stateProductDetails['type']?._id,
             label: stateProductDetails['type']?.ten
         }
-        console.log(value_obj)
         return value_obj
     }
     return (
@@ -1370,7 +1378,7 @@ const AdminProduct = () => {
                         <Select
                             name="type"
                             value={typeUpdateSelected()}
-                            onChange={handleOnchangeDetails}
+                            onChange={handleOnchangeDetailsType}
                             options={renderOptionsCategory(typeProduct?.data?.data)}
                             labelInValue={true}
                         />
