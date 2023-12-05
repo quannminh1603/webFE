@@ -194,14 +194,14 @@ const SignUpPage = () => {
 
   const { data, isLoading, isSuccess, isError } = mutation
 
-  useEffect(() => {
-    if (isSuccess) {
-      message.success()
-      handleNavigateSignIn()
-    } else if (isError) {
-      message.error()
-    }
-  }, [isSuccess, isError])
+  // useEffect(() => {
+  //   if (!isSuccess) {
+  //     message.success()
+  //     handleNavigateSignIn()
+  //   } else if (isError) {
+  //     message.error()
+  //   }
+  // }, [isSuccess, isError])
 
 
   const handleNavigateSignIn = () => {
@@ -209,7 +209,13 @@ const SignUpPage = () => {
   }
 
   const handleSignUp = () => {
-    mutation.mutate({ name, email, password, confirmPassword, phone, address })
+    const signUp = mutation.mutate({ name, email, password, confirmPassword, phone, address })
+    if(signUp) {
+      alert("Đăng ký thành công")
+    }else {
+      alert("Đăng ký thất bại")
+    }
+
   }
 
   return (
@@ -271,7 +277,7 @@ const SignUpPage = () => {
               onClick={handleSignUp}
               size={40}
               styleButton={{
-                background: 'rgb(255, 57, 69)',
+                background: '#4169E1',
                 height: '48px',
                 width: '100%',
                 border: 'none',

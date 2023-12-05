@@ -24,7 +24,7 @@ const HeaderMenuComponent = () => {
   }
   return (
     <div className="menu">
-      <nav className="container">
+      <nav className="container-menu">
         <div className="select_nav_left">
           <a href="/">
             <img src={logo} alt="" />

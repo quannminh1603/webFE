@@ -45,6 +45,15 @@
     display: flex;
     align-items: center;
   }
+
+  .menu .container-menu {
+    width: 95%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+  }
   
   .select_nav_mid .select_menu {
     display: flex;

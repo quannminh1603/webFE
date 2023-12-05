@@ -334,31 +334,6 @@ const ProductDetailsComponent = ({idProduct}) => {
             <Row style={{ padding: '16px', background: '#fff', borderRadius: '4px', height:'100%' }}>
                 <Col span={10} style={{ borderRight: '1px solid #e5e5e5', paddingRight: '8px' }}>
                     <Image src={productDetails?.image} alt="image prodcut" preview={false} />
-                    <Row style={{ paddingTop: '10px', justifyContent: 'space-between' }}>
-                        <WrapperStyleColImage span={4} sty>
-                            <WrapperStyleImageSmall src={imageProductSmall} alt="image small" preview={false} />
-                        </WrapperStyleColImage>
-                        <WrapperStyleColImage span={4}>
-                            <WrapperStyleImageSmall src={imageProductSmall} alt="image small" preview={false} />
-                        </WrapperStyleColImage>
-
-                        <WrapperStyleColImage span={4}>
-                            <WrapperStyleImageSmall src={imageProductSmall} alt="image small" preview={false} />
-                        </WrapperStyleColImage>
-
-                        <WrapperStyleColImage span={4}>
-                            <WrapperStyleImageSmall src={imageProductSmall} alt="image small" preview={false} />
-                        </WrapperStyleColImage>
-
-                        <WrapperStyleColImage span={4}>
-                            <WrapperStyleImageSmall src={imageProductSmall} alt="image small" preview={false} />
-                        </WrapperStyleColImage>
-
-                        <WrapperStyleColImage span={4}>
-                            <WrapperStyleImageSmall src={imageProductSmall} alt="image small" preview={false} />
-                        </WrapperStyleColImage>
-
-                    </Row>
                 </Col>
                 <Col span={14} style={{ paddingLeft: '10px' }}>
                     <WrapperStyleNameProduct>{productDetails?.name}</WrapperStyleNameProduct>
@@ -370,18 +345,11 @@ const ProductDetailsComponent = ({idProduct}) => {
                         <WrapperPriceTextProduct>{convertPrice(productDetails?.price)}</WrapperPriceTextProduct>
                     </WrapperPriceProduct>
                     <WrapperAddressProduct>
-                        <span>Giao đến </span>
-                        <span className='address'>{user?.address}</span> -
-                        <span className='change-address'>Đổi địa chỉ</span>
+                        <span>Giao đến: </span>
+                        <span className='address'>{user?.address}</span>
                     </WrapperAddressProduct>
-                    <LikeButtonComponent
-                     dataHref={ process.env.REACT_APP_IS_LOCAL 
-                                ? "https://developers.facebook.com/docs/plugins/" 
-                                : window.location.href
-                            } 
-                    />
                     <div style={{ margin: '10px 0 20px', padding: '10px 0', borderTop: '1px solid #e5e5e5', borderBottom: '1px solid #e5e5e5' }}>
-                        <div style={{ marginBottom: '10px' }}>Số lượng: {productDetails?.countInStock}</div>
+                        <div style={{ marginBottom: '10px' }}>Số lượng còn lại: {productDetails?.countInStock}</div>
                         <WrapperQualityProduct>
                             <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('decrease',numProduct === 1)}>
                                 <MinusOutlined style={{ color: '#000', fontSize: '20px' }} />
@@ -392,12 +360,12 @@ const ProductDetailsComponent = ({idProduct}) => {
                             </button>
                         </WrapperQualityProduct>
                     </div>
-                    <div style={{ display: 'flex', aliggItems: 'center', gap: '12px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                         <div>
                             <ButtonComponent
                                 size={40}
                                 styleButton={{
-                                    background: 'rgb(255, 57, 69)',
+                                    background: 'light',
                                     height: '48px',
                                     width: '220px',
                                     border: 'none',
@@ -409,18 +377,6 @@ const ProductDetailsComponent = ({idProduct}) => {
                             ></ButtonComponent>
                             {errorLimitOrder && <div style={{color: 'red'}}>San pham het hang</div>}
                         </div>
-                        <ButtonComponent
-                            size={40}
-                            styleButton={{
-                                background: '#fff',
-                                height: '48px',
-                                width: '220px',
-                                border: '1px solid rgb(13, 92, 182)',
-                                borderRadius: '4px'
-                            }}
-                            textbutton={'Mua trả sau'}
-                            styleTextButton={{ color: 'rgb(13, 92, 182)', fontSize: '15px' }}
-                        ></ButtonComponent>
                     </div>
                 </Col>
                 <CommentComponent 

@@ -30,12 +30,13 @@
     background-color: #fff;
   }
   
-  .container {
+  .menu .container-menu {
     width: 95%;
     margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 !important;
   }
   
   .select_nav_left {

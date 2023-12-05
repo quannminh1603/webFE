@@ -32,14 +32,10 @@ const ListDanhmuc = () => {
                         <img className="gif3" src={gifDanhmucHome3} alt="" />
                     </div>
                 </div>
-            </div>
                 <h3>LOOKS GOOD. RUNS GOOD. FEELS GOOD.</h3>
-            <div className="register_home">
-                <h4>Đăng kí thành viên để được ưu đãi 15% tại Firefly</h4>
-                <a>Đăng kí miễn phí</a>
             </div>
-            <div className="danhsach">
-                <div className="col-4">
+            {/* <div className="danhsach">
+                <div className="col4">
                     <h1>Giày</h1>
                     <ul>
                         <li><a href="">Thương hiệu nổi bật</a></li>
@@ -48,7 +44,7 @@ const ListDanhmuc = () => {
                         <li><a href="">Giày đá banh</a></li>
                     </ul>
                 </div>
-                <div className="col-4">
+                <div className="col4">
                     <h1>Quần áo</h1>
                     <ul>
                         <li><a href="">Quần áo thể thao</a></li>
@@ -56,7 +52,7 @@ const ListDanhmuc = () => {
                         <li><a href="">Quần áo tập gym</a></li>
                     </ul>
                 </div>
-                <div className="col-4">
+                <div className="col4">
                     <h1>Môn thể thao</h1>
                     <ul>
                         <li><a href="">Chạy bộ</a></li>
@@ -65,7 +61,7 @@ const ListDanhmuc = () => {
                         <li><a href="">Tập luyện/phòng Gym</a></li>
                     </ul>
                 </div>
-                <div className="col-4">
+                <div className="col4">
                     <h1>Thuơng hiệu</h1>
                     <ul>
                         <li><a href="">Nike</a></li>
@@ -75,7 +71,7 @@ const ListDanhmuc = () => {
                         <li><a href="">Converse</a></li>
                     </ul>
                 </div>
-            </div>
+            </div> */}
         </>
     );
 }

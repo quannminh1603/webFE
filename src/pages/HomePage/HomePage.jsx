@@ -203,8 +203,8 @@ const HomePage = () => {
                 }
                 )}
             </div>
-                <SubBanner />
           </div>
+                <SubBanner />
           <div style={{marginBottom: "80px"}} className="list_product_nike">
             <h1>Giày MLB</h1>
             <div className="list_items_mlb">
@@ -252,7 +252,7 @@ const HomePage = () => {
               )
             })}
           </WrapperProducts> */}
-          <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
+          {/* <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
             <WrapperButtonMore
               textbutton={isPreviousData ? 'Load more' : "Xem thêm"} type="outline" styleButton={{
                 border: `1px solid ${products?.total === products?.data?.length ? '#f5f5f5' : '#9255FD'}`, color: `${products?.total === products?.data?.length ? '#f5f5f5' : '#9255FD'}`,
@@ -262,7 +262,7 @@ const HomePage = () => {
               styleTextButton={{ fontWeight: 500, color: products?.total === products?.data?.length && '#fff' }}
               onClick={() => setLimit((prev) => prev + 6)}
             />
-          </div>
+          </div> */}
         </div>
       </div>
       <Footer />

@@ -168,7 +168,7 @@ export const renderOptionsCategory = (arr) => {
 
 export const convertPrice = (price) => {
     try {
-        const result = price?.toLocaleString().replaceAll(',', '.')
+        const result = price?.toLocaleString().replaceAll('.', ',')
         return `${result} VND`
     } catch (error) {
         return null

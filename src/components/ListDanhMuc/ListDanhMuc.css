@@ -17,6 +17,12 @@
     margin-top: 0px;
 }
 
+.list_danhmuc h3 {
+    margin-top: 40px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
 .list_danhmuc .grid-2 .left,
 .list_danhmuc .grid-2 .right,
 .list_danhmuc .grid-2 .left2,
@@ -85,13 +91,17 @@ h3 {
     margin-top: 80px;
 }
 
-.danhsach .col-4 h1 {
+.danhsach .col4 h1 {
     font-weight: bold;
     font-size: 24px;
     margin-bottom: 20px;
 }
 
-.danhsach .col-4 ul li a {
+.danhsach .col4 ul {
+    padding-left: 0;
+}
+
+.danhsach .col4 ul li a {
     font-size: 18px;
     color: #000;
     text-decoration: none;
