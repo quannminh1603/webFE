@@ -51,8 +51,9 @@ const SignInPage = () => {
   const handleGetDetailsUser = async (id, token) => {
     const storage = localStorage.getItem('refresh_token')
     const refreshToken = JSON.parse(storage)
-    const res = await UserService.getDetailsUser(id, token)
-    dispatch(updateUser({ ...res?.data, access_token: token,refreshToken }))
+    const res = await UserService.getDetailsUser(id, token);
+    localStorage.setItem('user', JSON.stringify(res?.data));
+    dispatch(updateUser({ ...res?.data, access_token: token,refreshToken }));
   }
 
 
