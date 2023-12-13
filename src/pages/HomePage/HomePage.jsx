@@ -95,144 +95,140 @@
 //   )
 // }
 
-// export default HomePage 
+// export default HomePage
 
 // test
-import React from 'react'
-import TypeProduct from '../../components/TypeProduct/TypeProduct'
-import { WrapperButtonMore, WrapperProducts, WrapperTypeProduct } from './style'
-import CardComponent from '../../components/CardComponent/CardComponent'
-import { useQuery } from '@tanstack/react-query'
+import React, {useEffect, useState} from 'react'
 import * as ProductService from '../../services/ProductService'
-import { useSelector } from 'react-redux'
-import { useState } from 'react'
+import {useSelector} from 'react-redux'
 import Loading from '../../components/LoadingComponent/Loading'
-import { useDebounce } from '../../hooks/useDebounce'
-import { useEffect } from 'react'
+import {useDebounce} from '../../hooks/useDebounce'
 import Footer from '../../components/FooterComponent/FooterComponent'
 import Navbar from '../../components/Navbar/Navbar'
 import AboutHomeComponent from '../../components/AboutHomeComponent/AboutHomeComponent'
 import ListProductAdidas from '../../components/ListProductAdidas/ListProductAdidas'
 import SubBanner from '../../components/SubBanner/SubBanner'
 import ListDanhmuc from '../../components/ListDanhMuc/ListDanhMuc'
-import ListProductNike from '../../components/ListProductNike/ListProductNike'
 import ListProductMlb from '../../components/ListProductMlb/ListProductMlb'
 
 const HomePage = () => {
-  const searchProduct = useSelector((state) => state?.product?.search)
-  const searchDebounce = useDebounce(searchProduct, 500)
-  const [loading, setLoading] = useState(false)
-  const [limit, setLimit] = useState(20)
-  const [typeProducts, setTypeProducts] = useState([])
+    const searchProduct = useSelector((state) => state?.product?.search)
+    const searchDebounce = useDebounce(searchProduct, 500)
+    const [loading, setLoading] = useState(false)
+    const [limit, setLimit] = useState(20)
+    const [typeProducts, setTypeProducts] = useState([])
 
-  const fetchProductAll = async (context) => {
-    const limit = context?.queryKey && context?.queryKey[1]
-    const search = context?.queryKey && context?.queryKey[2]
-    const res = await ProductService.getAllProduct(search, limit)
-
-    return res
-
-  }
-
-  const fetchAllTypeProduct = async () => {
-    const res = await ProductService.getAllTypeProduct()
-    if (res?.status === 'OK') {
-      setTypeProducts(res?.data)
+    const [productList, setProductList] = useState([]);
+    const fetchProductAll = (context) => {
+        setLoading(true);
+        const limit = context?.queryKey && context?.queryKey[1];
+        const search = context?.queryKey && context?.queryKey[2];
+        ProductService.getAllProduct(search, limit).then((res) => {
+            setProductList(res?.data);
+            setLoading(false);
+        });
     }
-  }
 
-  const { isLoading, data: products, isPreviousData } = useQuery(['products', limit, searchDebounce], fetchProductAll, { retry: 3, retryDelay: 1000, keepPreviousData: true })
+    const fetchAllTypeProduct = async () => {
+        const res = await ProductService.getAllTypeProduct()
+        if (res?.status === 'OK') {
+            setTypeProducts(res?.data)
+        }
+    }
+    useEffect(() => {
+        fetchAllTypeProduct();
+        fetchProductAll({queryKey: ['products', limit, searchDebounce]});
+    }, [])
 
-  useEffect(() => {
-    fetchAllTypeProduct()
-  }, [])
+    return (
+        <>
+        <Loading isLoading={loading}>
+            <div className='body'>
+                <div id="container">
+                    <Navbar/>
+                    <AboutHomeComponent/>
+                    <div style={{marginBottom: "80px"}} className="list_product_nike">
+                        <h1>Giày Nike</h1>
+                        <div className="list_items_nike">
+                            {productList?.map((product) => {
+                                    if (product?.type?.ten === 'Giày Nike') {
+                                        return (
+                                            <ListProductAdidas
+                                                key={product._id}
+                                                countInStock={product.countInStock}
+                                                description={product.description}
+                                                image={product.image}
+                                                name={product.name}
+                                                price={product.price}
+                                                rating={product.rating}
+                                                type={product.type}
+                                                selled={product.selled}
+                                                discount={product.discount}
+                                                id={product._id}
+                                            />
+                                        )
 
-  return (
-    <>
-      <Loading isLoading={isLoading || loading}>
-      <div className='body'>
-        <div id="container">
-          <Navbar />
-          <AboutHomeComponent />
-          <div style={{marginBottom: "80px"}} className="list_product_nike">
-            <h1>Giày Nike</h1>
-            <div className="list_items_nike">
-                {products?.data?.map((product) => {
-                  if (product.type == "Giày Nike")
-                    return (
-                      <ListProductNike
-                        key={product._id}
-                        countInStock={product.countInStock}
-                        description={product.description}
-                        image={product.image}
-                        name={product.name}
-                        price={product.price}
-                        rating={product.rating}
-                        type={product.type}
-                        selled={product.selled}
-                        discount={product.discount}
-                        id={product._id}
-                      />
-                    )
-                })}
-            </div>
+                                    }
+                                }
+                            )}
+                    </div>
 
-          </div>
-          <div style={{marginBottom: "80px"}} className="list_product_nike">
-            <h1>Giày Adidas</h1>
-            <div className="list_items_adidas">
-                {products?.data?.map((product) => {
-                  if (product.type === "Giày Adidas"){
-                    return (
-                      <ListProductAdidas
-                        key={product._id}
-                        countInStock={product.countInStock}
-                        description={product.description}
-                        image={product.image}
-                        name={product.name}
-                        price={product.price}
-                        rating={product.rating}
-                        type={product.type}
-                        selled={product.selled}
-                        discount={product.discount}
-                        id={product._id}
-                      />
-                    )
+                </div>
+                <div style={{marginBottom: "80px"}} className="list_product_nike">
+                    <h1>Giày Adidas</h1>
+                    <div className="list_items_adidas">
+                        {productList?.map((product) => {
+                                if (product?.type?.ten === 'Giày Adidas') {
+                                    return (
+                                        <ListProductAdidas
+                                            key={product._id}
+                                            countInStock={product.countInStock}
+                                            description={product.description}
+                                            image={product.image}
+                                            name={product.name}
+                                            price={product.price}
+                                            rating={product.rating}
+                                            type={product.type}
+                                            selled={product.selled}
+                                            discount={product.discount}
+                                            id={product._id}
+                                        />
+                                    )
 
-                  }
-                }
-                )}
-            </div>
-          </div>
-                <SubBanner />
-          <div style={{marginBottom: "80px"}} className="list_product_nike">
-            <h1>Giày MLB</h1>
-            <div className="list_items_mlb">
-                {products?.data?.map((product) => {
-                  if (product.type == "Giày MLB")
-                    return (
-                      <ListProductMlb
-                        key={product._id}
-                        countInStock={product.countInStock}
-                        description={product.description}
-                        image={product.image}
-                        name={product.name}
-                        price={product.price}
-                        rating={product.rating}
-                        type={product.type}
-                        selled={product.selled}
-                        discount={product.discount}
-                        id={product._id}
-                      />
-                    )
-                })}
-            </div>
+                                }
+                            }
+                        )}
+                    </div>
+                </div>
+                <SubBanner/>
+                <div style={{marginBottom: "80px"}} className="list_product_nike">
+                    <h1>Giày MLB</h1>
+                    <div className="list_items_mlb">
+                        {productList?.map((product) => {
+                            if (product?.type?.ten === 'Giày MLB')
+                                return (
+                                    <ListProductMlb
+                                        key={product._id}
+                                        countInStock={product.countInStock}
+                                        description={product.description}
+                                        image={product.image}
+                                        name={product.name}
+                                        price={product.price}
+                                        rating={product.rating}
+                                        type={product.type}
+                                        selled={product.selled}
+                                        discount={product.discount}
+                                        id={product._id}
+                                    />
+                                )
+                        })}
+                    </div>
 
-          </div>
-          <ListDanhmuc />
-          
+                </div>
+                <ListDanhmuc/>
 
-          {/* <WrapperProducts>
+
+                {/* <WrapperProducts>
             {products?.data?.map((product) => {
               if(product.type == "Giày MLB")
               return (
@@ -252,7 +248,7 @@ const HomePage = () => {
               )
             })}
           </WrapperProducts> */}
-          {/* <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
+                {/* <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
             <WrapperButtonMore
               textbutton={isPreviousData ? 'Load more' : "Xem thêm"} type="outline" styleButton={{
                 border: `1px solid ${products?.total === products?.data?.length ? '#f5f5f5' : '#9255FD'}`, color: `${products?.total === products?.data?.length ? '#f5f5f5' : '#9255FD'}`,
@@ -263,12 +259,12 @@ const HomePage = () => {
               onClick={() => setLimit((prev) => prev + 6)}
             />
           </div> */}
+            </div>
         </div>
-      </div>
-      <Footer />
-    </Loading>
-    </>
-  ) 
+        <Footer/>
+        </Loading>
+</>
+)
 }
 
 export default HomePage 

@@ -107,6 +107,7 @@ import AdidasProducts from "../pages/AdidasProducts/AdidasProducts";
 import MlbProducts from "../pages/MlbProducts/MlbProducts";
 import CategoryList from "../pages/AdminPage/Category/CategoryList";
 import CategoryDetail from "../pages/AdminPage/Category/Detail/CategoryDetail";
+import RevenueByWeek from "../pages/AdminPage/components/RevenueByWeek";
 
 export const routes = [
     {
@@ -210,6 +211,12 @@ export const routes = [
     {
         path: '/system/admin/category/:id',
         page: CategoryDetail,
+        isShowHeader: false,
+        isPrivated: true
+    },
+    {
+        path: '/system/admin/order/revenue',
+        page: RevenueByWeek,
         isShowHeader: false,
         isPrivated: true
     },
