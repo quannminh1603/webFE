@@ -348,6 +348,10 @@ const ProductDetailsComponent = ({idProduct}) => {
                         <span>Giao đến: </span>
                         <span className='address'>{user?.address}</span>
                     </WrapperAddressProduct>
+                    <div>
+                        <p>Size: </p>
+                        <button className="btn btn-outline-secondary text-dark">{productDetails?.size}</button>
+                    </div>
                     <div style={{ margin: '10px 0 20px', padding: '10px 0', borderTop: '1px solid #e5e5e5', borderBottom: '1px solid #e5e5e5' }}>
                         <div style={{ marginBottom: '10px' }}>Số lượng còn lại: {productDetails?.countInStock}</div>
                         <WrapperQualityProduct>
