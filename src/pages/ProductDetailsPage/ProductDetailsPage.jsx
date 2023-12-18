@@ -67,7 +67,7 @@ const ProductDetailsPage = () => {
             </div>
             <div className="comment">
                 <input type="text" placeholder="Bình luận về sản phẩm..." onChange={(e) => setCommentValue(e)}/>
-                <FontAwesomeIcon className="icon-send-comment" icon={faPaperPlane} onClick={() => handleSendComment()}/>
+                <FontAwesomeIcon className="icon-send-comment" icon={faPaperPlane} onClick={handleSendComment}/>
                 {commentList.map((cmt) => {
                     return (
                         <div className="user_comment">
