@@ -4,8 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { StarFilled } from '@ant-design/icons'
-// import thumb from "../../assets/images/Rectangle24.png";
-// import thumb2 from "../../assets/images/anh1.jpg"
 import jordan1 from "../../assets/images/jordan1.jpg"
 import jordan2 from "../../assets/images/jordan2.jpg"
 import jordan3 from "../../assets/images/jordan3.jpg"

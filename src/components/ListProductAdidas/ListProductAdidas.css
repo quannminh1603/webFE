@@ -17,11 +17,7 @@ article {
 
 
 .list_items_adidas {
-  /* margin: 20px 0;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: 12px; */
+
   display: grid;
   grid-template-columns: auto auto auto auto;
   gap: 20px;

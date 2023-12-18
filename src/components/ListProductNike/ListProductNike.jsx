@@ -15,22 +15,24 @@ const ListProductNike = (props) => {
   const handleDetailsProduct = (id) => {
     navigate(`/product-details/${id}`);
   }
-
   return (
-    <article className="product_nike_custom">
-      <div className="slect_product_nike_custom">
-        <div onClick={() => {handleDetailsProduct(id)}} className="product_img_nike_custom">
-          <img alt="example" src={image} />
-          <a><FontAwesomeIcon className="cartIcon_custom" icon={faCartPlus} style={{color: "#fff",}} /></a>
-        </div>
-        <div className="product_name_nike_custom">
-          <p onClick={() => {handleDetailsProduct(id)}} className="name_nike_custom">{name}</p>
-          {rating}<FontAwesomeIcon icon={faStar} className="starIcon_custom" style={{color: "#fbff00",}} />
-          <div className="price_nike_custom">{price}<u>đ</u></div>
-        </div>
-      </div>
+    <article className="product_nike">
+          <div className="slect_product_nike">
+            <div onClick={() => {handleDetailsProduct(id)}} className="product_img_nike">
+              <img alt="example" src={image} />
+              <a><FontAwesomeIcon className="cartIcon" icon={faCartPlus} style={{color: "#fff",}} /></a>
+            </div>
+            <div className="product_name_nike">
+              <p onClick={() => {handleDetailsProduct(id)}} className="name_nike">{name}</p>
+              {rating}<FontAwesomeIcon icon={faStar} className="starIcon" style={{color: "#fbff00",}} />
+              <div className="price_nike">{price}<u>đ</u></div>
+            </div>
+          </div>
     </article>
+      
+    
   );
 };
+
 
 export default ListProductNike;

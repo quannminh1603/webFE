@@ -110,7 +110,7 @@ import ListProductAdidas from '../../components/ListProductAdidas/ListProductAdi
 import SubBanner from '../../components/SubBanner/SubBanner'
 import ListDanhmuc from '../../components/ListDanhMuc/ListDanhMuc'
 import ListProductMlb from '../../components/ListProductMlb/ListProductMlb'
-
+import ListProductNike from '../../components/ListProductNike/ListProductNike'
 const HomePage = () => {
     const searchProduct = useSelector((state) => state?.product?.search)
     const searchDebounce = useDebounce(searchProduct, 500)
@@ -153,7 +153,7 @@ const HomePage = () => {
                             {productList?.map((product) => {
                                     if (product?.type?.ten === 'Giày Nike') {
                                         return (
-                                            <ListProductAdidas
+                                            <ListProductNike
                                                 key={product._id}
                                                 countInStock={product.countInStock}
                                                 description={product.description}
@@ -228,37 +228,6 @@ const HomePage = () => {
                 <ListDanhmuc/>
 
 
-                {/* <WrapperProducts>
-            {products?.data?.map((product) => {
-              if(product.type == "Giày MLB")
-              return (
-                <CardComponent
-                  key={product._id}
-                  countInStock={product.countInStock}
-                  description={product.description}
-                  image={product.image}
-                  name={product.name}
-                  price={product.price}
-                  rating={product.rating}
-                  type={product.type}
-                  selled={product.selled}
-                  discount={product.discount}
-                  id={product._id}
-                />
-              )
-            })}
-          </WrapperProducts> */}
-                {/* <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
-            <WrapperButtonMore
-              textbutton={isPreviousData ? 'Load more' : "Xem thêm"} type="outline" styleButton={{
-                border: `1px solid ${products?.total === products?.data?.length ? '#f5f5f5' : '#9255FD'}`, color: `${products?.total === products?.data?.length ? '#f5f5f5' : '#9255FD'}`,
-                width: '240px', height: '38px', borderRadius: '4px'
-              }}
-              disabled={products?.total === products?.data?.length || products?.totalPage === 1}
-              styleTextButton={{ fontWeight: 500, color: products?.total === products?.data?.length && '#fff' }}
-              onClick={() => setLimit((prev) => prev + 6)}
-            />
-          </div> */}
             </div>
         </div>
         <Footer/>

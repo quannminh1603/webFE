@@ -36,23 +36,25 @@ const MlbProductsComponent = (props) => {
     navigate(`/product-details/${id}`);
   }
   return (
-    <>
-      <article className="product_mlb">
-          <div className="slect_product_mlb">
-            <div onClick={() => {handleDetailsProduct(id)}} className="product_img_mlb">
-              <img alt="example" src={image} />
-              <a><FontAwesomeIcon className="cartIcon" icon={faCartPlus} style={{color: "#fff",}} /></a>
-            </div>
-            <div className="product_name_mlb">
-              <p onClick={() => {handleDetailsProduct(id)}} className="name_mlb">{name}</p>
-              <div className="rating_adidas">
+      <article className="product">
+                <div className="slect_product">
+                    <div onClick={() => {
+                        handleDetailsProduct(id)
+                    }} className="product_img">
+                        <img alt="example" src={image}/>
+                        <a><FontAwesomeIcon className="cartIcon" icon={faCartPlus} style={{color: "#fff",}}/></a>
+                    </div>
+                    <div className="product_name">
+                        <p onClick={() => {
+                            handleDetailsProduct(id)
+                        }} className="name">{name}</p>
+                        <div className="rating">
                             <StarRatingComponent rating={rating}/>
                         </div>
-              <div className="price_mlb">{formatMoney(price)}</div>
-            </div>
-          </div>
-    </article>
-    </>
+                        <div className="price">{formatMoney(price)}</div>
+                    </div>
+                </div>
+            </article>
   );
 }
 

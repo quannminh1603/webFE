@@ -15,13 +15,16 @@ article {
   margin: 50px auto;
 }
 
+
 .list_items_nike {
+
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: auto auto auto auto;
   gap: 20px;
 }
 
 .list_items_nike .product_nike {
+  /* display: grid; */
   border: 1px #ccc solid;
   border-radius: 10px;
   padding: 8px;
@@ -32,11 +35,80 @@ article {
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
+  object-fit: cover;
+  /* height: 400px; */
 }
+
+/* .product_nike {
+  position: relative;
+  border: 0.2px solid #000000;
+  padding: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.product_img_nike {
+  width: 100%;
+}
+
+.product_img_nike img {
+  width: 100%;
+}
+
+.product_name_nike {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.product_name_nike p {
+  font-weight: 700;
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.product_name_nike .price_nike {
+  font-weight: 400;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.product_nike:hover .slect_product_nike::before {
+  display: block;
+}
+
+.product_nike:hover .slect_product_nike::after {
+  display: block;
+}
+
+.slect_product_nike::before {
+  display: none;
+  content: "+";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: transparent;
+  transform: translate(-50%, -50%);
+  font-size: 80px;
+  color: black;
+}
+
+.slect_product_nike::after {
+  content: "";
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0%;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  opacity: 0.2;
+} */
 
 .product_img_nike {
   position: relative;
   overflow: hidden;
+
 }
 
 .product_img_nike:hover img {
@@ -46,6 +118,7 @@ article {
 .product_img_nike:hover .cartIcon {
   opacity: 1;
   display: block;
+  /* z-index: 1; */
 }
 
 .product_img_nike a {
@@ -65,8 +138,10 @@ article {
   left: 0;
   width: 100%;
   height: 10%;
+  /* padding: 44.2% 0; */
   padding: 46% 2% 44.2%;
   opacity: .6;
+  /* transition: opacity 0.3s ease; */
   cursor: pointer;
   color: #fff !important;
 }
