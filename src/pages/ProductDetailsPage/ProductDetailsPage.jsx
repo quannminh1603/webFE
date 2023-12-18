@@ -6,6 +6,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPaperPlane} from '@fortawesome/free-solid-svg-icons'
 import Footer from '../../components/FooterComponent/FooterComponent'
 import {axiosJWT} from "../../services/UserService";
+import {getTimeAgo} from "../../utils";
 
 const ProductDetailsPage = () => {
     const {id} = useParams()
@@ -66,15 +67,24 @@ const ProductDetailsPage = () => {
 
             </div>
             <div className="comment">
-                <input type="text" placeholder="Bình luận về sản phẩm..." onChange={(e) => setCommentValue(e)}/>
-                <FontAwesomeIcon className="icon-send-comment" icon={faPaperPlane} onClick={handleSendComment}/>
+                <input
+                    type="text"
+                    placeholder="Bình luận về sản phẩm..."
+                    onChange={(e) => setCommentValue(e)}
+                />
+                <FontAwesomeIcon
+                    className="icon-send-comment"
+                    icon={faPaperPlane}
+                    onClick={handleSendComment}
+                />
                 {commentList.map((cmt) => {
                     return (
-                        <div className="user_comment">
+                        <div className="user_comment" key={cmt.id}>
                             <p className="name">{cmt?.user?.name}</p>
                             <p className="content">{cmt?.content}</p>
+                            <p className="time">{getTimeAgo(cmt?.createAt)}</p>
                         </div>
-                    )
+                    );
                 })}
             </div>
             <Footer/>

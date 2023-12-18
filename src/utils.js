@@ -103,6 +103,7 @@
 //   }
 
 // test
+import moment from "moment";
 import {orderContant} from "./contant";
 
 export const isJsonString = (data) => {
@@ -229,5 +230,29 @@ export const formatMoney = (money) => {
         return `${result} VND`
     } catch (error) {
         return null
+    }
+}
+
+export function getTimeAgo(commentTime) {
+    if (commentTime == null || commentTime === '' || commentTime === undefined) {
+        return '';
+    }
+    const now = moment();
+    const commentMoment = moment(commentTime); // Giả sử commentTime là thời gian của bình luận
+
+    const duration = moment.duration(now.diff(commentMoment));
+    const secondsAgo = duration.asSeconds();
+    const minutesAgo = duration.asMinutes();
+    const hoursAgo = duration.asHours();
+    const daysAgo = duration.asDays();
+
+    if (secondsAgo < 60) {
+        return `${Math.round(secondsAgo)} giây trước`;
+    } else if (minutesAgo < 60) {
+        return `${Math.round(minutesAgo)} phút trước`;
+    } else if (hoursAgo < 24) {
+        return `${Math.round(hoursAgo)} giờ trước`;
+    } else {
+        return `${Math.round(daysAgo)} ngày trước`;
     }
 }
