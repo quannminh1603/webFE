@@ -12,7 +12,9 @@ import { useMutationHooks } from '../../hooks/useMutationHook'
 import Loading from '../../components/LoadingComponent/Loading'
 import jwtDecode from "jwt-decode";
 import { useDispatch, useSelector } from 'react-redux'
+import * as message from '../../components/Message/Message'
 import { updateUser } from '../../redux/slides/userSlide'
+import './SignInPage.css'
 
 const SignInPage = () => {
   const [isShowPassword, setIsShowPassword] = useState(false)
@@ -30,12 +32,13 @@ const SignInPage = () => {
   const { data, isLoading, isSuccess } = mutation
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess  && data?.status === 'OK') {
       if(location?.state) {
         navigate(location?.state)
       }
       else {
         navigate('/')
+        message.success("Đăng nhập thành công");
       }
       localStorage.setItem('access_token', JSON.stringify(data?.access_token))
       localStorage.setItem('refresh_token', JSON.stringify(data?.refresh_token))
@@ -84,8 +87,8 @@ const SignInPage = () => {
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0, 0, 0, 0.53)', height: '100vh' }}>
-      <div style={{ width: '800px', height: '445px', borderRadius: '6px', background: '#fff', display: 'flex' }}>
-        <WrapperContainerLeft>
+      <div style={{ width: '800px', borderRadius: '6px', background: '#fff', display: 'flex' }}>
+        <div className='signInPage'>
           <h1>Xin chào</h1>
           <p>Đăng nhập vào tạo tài khoản</p>
           <InputForm style={{ marginBottom: '10px' }} placeholder="abc@gmail.com" value={email} onChange={handleOnchangeEmail} />
@@ -131,9 +134,9 @@ const SignInPage = () => {
               styleTextButton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
             ></ButtonComponent>
           </Loading>
-          <p><WrapperTextLight>Quên mật khẩu?</WrapperTextLight></p>
-          <p>Chưa có tài khoản? <WrapperTextLight onClick={handleNavigateSignUp}> Tạo tài khoản</WrapperTextLight></p>
-        </WrapperContainerLeft>
+          {/* <p><WrapperTextLight>Quên mật khẩu?</WrapperTextLight></p> */}
+          <p style={{color: '#000'}}>Chưa có tài khoản? <div className='handleNavigateSignUp' onClick={handleNavigateSignUp}> Tạo tài khoản</div></p>
+        </div>
       </div>
     </div >
   )

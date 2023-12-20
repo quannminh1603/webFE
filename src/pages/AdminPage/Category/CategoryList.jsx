@@ -37,7 +37,7 @@ const CategoryList = () => {
         {
             title: "Chi tiết",
             render: (category) => (
-                <Link to={`${category?._id}`}><EditOutlined /></Link>
+                <Link to={`category/${category?._id}`}><EditOutlined /></Link>
             ),
         },
         {
@@ -52,7 +52,7 @@ const CategoryList = () => {
         <div className="container">
             <h2>Danh sách danh mục</h2>
             <div className={"d-flex"}>
-                <Link to="new">
+                <Link to="category/new">
                     <button>
                         <PlusOutlined /> Thêm mới
                     </button>

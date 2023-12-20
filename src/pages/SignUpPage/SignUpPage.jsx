@@ -151,13 +151,14 @@ import { useMutationHooks } from '../../hooks/useMutationHook'
 import Loading from '../../components/LoadingComponent/Loading'
 import * as message from '../../components/Message/Message'
 import { useEffect } from 'react'
+import './SignUpPage.css'
 
 const SignUpPage = () => {
   const navigate = useNavigate()
 
   const [isShowPassword, setIsShowPassword] = useState(false)
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false)
-  const [name, setName] = useState('');
+  const [name, setName] = useState();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -194,34 +195,40 @@ const SignUpPage = () => {
 
   const { data, isLoading, isSuccess, isError } = mutation
 
-  // useEffect(() => {
-  //   if (!isSuccess) {
-  //     message.success()
-  //     handleNavigateSignIn()
-  //   } else if (isError) {
-  //     message.error()
-  //   }
-  // }, [isSuccess, isError])
+  useEffect(() => {
+    if (isSuccess && data?.status === 'OK') {
+      console.log('isSuccess', isSuccess)
+      message.success("Đăng ký thành công");
+      handleNavigateSignIn()
+    } else if (isError) {
+      message.error("Đăng ký thất bại")
+    }
+  }, [isSuccess, isError])
 
 
   const handleNavigateSignIn = () => {
     navigate('/sign-in')
   }
 
-  const handleSignUp = () => {
-    const signUp = mutation.mutate({ name, email, password, confirmPassword, phone, address })
-    if(signUp) {
-      alert("Đăng ký thành công")
-    }else {
-      alert("Đăng ký thất bại")
-    }
+  // const handleSignUp = () => {
+  //   mutation.mutate({ name, email, password, confirmPassword, phone, address })
 
-  }
+  // }
+  const handleSignUp = async () => {
+    try {
+      await mutation.mutate({ name, email, password, confirmPassword, phone, address });
+    } catch (error) {
+      console.error("Đăng ký thất bại:", error);
+      // Xử lý lỗi một cách thích hợp, ví dụ: hiển thị thông báo lỗi cho người dùng
+      message.error("Đăng ký thất bại");
+    }
+  };
+  
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0, 0, 0, 0.53)', height: '100vh' }}>
-      <div style={{ width: '800px', height: '445px', borderRadius: '6px', background: '#fff', display: 'flex' }}>
-        <WrapperContainerLeft>
+      <div style={{ width: '800px', borderRadius: '6px', background: '#fff', display: 'flex' }}>
+        <div className='signUpPage'>
           <h1>Xin chào</h1>
           <p>Đăng nhập vào tạo tài khoản</p>
           <InputForm style={{ marginBottom: '10px' }} placeholder="Name" value={name} onChange={handleOnchangeName} />
@@ -288,8 +295,8 @@ const SignUpPage = () => {
               styleTextButton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
             ></ButtonComponent>
           </Loading>
-          <p>Bạn đã có tài khoản? <WrapperTextLight onClick={handleNavigateSignIn}> Đăng nhập</WrapperTextLight></p>
-        </WrapperContainerLeft>
+          <p style={{color: '#000'}}>Bạn đã có tài khoản? <div className='handleNavigateSignIn' onClick={handleNavigateSignIn}> Đăng nhập</div></p>
+        </div>
       </div>
     </div >
   )

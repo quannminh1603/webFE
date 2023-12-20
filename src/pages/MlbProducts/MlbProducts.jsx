@@ -13,7 +13,7 @@ const MlbProducts = () => {
   const searchDebounce = useDebounce(searchProduct, 500);
   const [loading, setLoading] = useState(false);
   const [limit, setLimit] = useState(8);
-  const [type, setType] = useState('Giày Mlb');
+  const [type, setType] = useState('Giày MLB');
   const [typeProducts, setTypeProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 8; {/* set số sp*/}

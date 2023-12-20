@@ -2,7 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    /*font-size: 20px; */
+    font-size: 20px;
     /* color: #000 !important; */
   }
   
@@ -68,7 +68,6 @@
   
   .select_nav_mid .select_menu li a {
     padding: 36px 0;
-    font-size: 20px;
   }
   
   .select_nav_mid .select_menu li > a {
@@ -131,15 +130,6 @@
     display: none;
     position: relative; /* Thêm dòng này để có thể sử dụng z-index */
 }
-.menuc2 ul {
-  list-style: none;
-  display: inline-block;
-  width: 100%;
-}
-
-.menuc2 ul li {
-  padding: 10px 20px !important; 
-}
 
 .select_nav_mid .select_menu > .listGiay:hover > .menuc2 {
     display: block;
@@ -147,13 +137,13 @@
     top: 60px;
     background-color: #fbfbfb;
     z-index: 999; /* Số này có thể được điều chỉnh tùy thuộc vào ngữ cảnh cụ thể */
-    width: 200px;
-    /* height: 380px; */
+    width: 1260px;
+    height: 380px;
     left: 0;
-    /* margin-left: -254px; */
+    margin-left: -254px;
     border-radius: 10px;
     box-shadow: 0.5px 0px 6px 0px #000;
-    /* padding: 20px 40px; */
+    padding: 60px 40px;
 }
 
 /* Các styles khác ở đây... */

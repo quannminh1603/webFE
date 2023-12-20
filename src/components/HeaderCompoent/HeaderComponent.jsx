@@ -124,60 +124,30 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
           </div>
           <div className="select_nav_mid">
             <ul className="select_menu">
-              <li className="listGiay">
-                <a href="/contact">Sản phẩm</a>
+              {/* <li className="listGiay">
+                <a href="/contact">Thương hiệu</a>
                 <div className="menuc2">
-                  <div className="grid-3">
-                    <div>
-                      <ul>
-                        <li><a style={{ fontWeight: "bold" }} href="/nikeproducts">Nike</a></li>
-                        {/* <li><a href="#">Adidas</a></li>
-                      <li><a href="#">MLB</a></li>
-                      <li><a href="#">Asic</a></li>
-                      <li><a href="#">Jordan</a></li>
-                      <li><a href="#">Reebok</a></li> */}
-                      </ul>
-                    </div>
-                    <div>
-                      <ul>
-                        <li><a style={{ fontWeight: "bold" }} href="/adidasproducts">Adidas</a></li>
-                        {/* <li><a href="#">Nike</a></li>
-                      <li><a href="#">MLB</a></li>
-                      <li><a href="#">Asic</a></li>
-                      <li><a href="#">Jordan</a></li>
-                      <li><a href="#">Reebok</a></li> */}
-                      </ul>
-                    </div>
-                    <div>
-                      <ul>
-                        <li><a style={{ fontWeight: "bold" }} href="/mlb">Giày MLB</a></li>
-                        {/* <li><a href="#">Adidas</a></li>
-                      <li><a href="#">MLB</a></li>
-                      <li><a href="#">Asic</a></li>
-                      <li><a href="#">Jordan</a></li>
-                      <li><a href="#">Reebok</a></li> */}
-                      </ul>
-                    </div>
-                    <div>
-                      <img src={logo} alt="" />
-                    </div>
-                  </div>
+                  <ul>
+                    <li><a href="/nikeproducts">Nike</a></li>
+                    <li><a href="/adidasproducts">Adidas</a></li>
+                    <li><a href="/mlb">MLB</a></li>
+                  </ul>
                 </div>
+              </li> */}
+              <li>
+                <a href="/nikeproducts">Nike</a>
               </li>
               <li>
-                <a href="/clothesproducts">Quần áo</a>
+                <a href="/mlb">MLB</a>
               </li>
               <li>
-                <a href="/">Môn thể thao</a>
+                <a href="/adidasproducts">Adidas</a>
               </li>
               <li>
-                <a href="/detail?id=1">Thương hiệu</a>
+                <a href="/detail">Áo quần</a>
               </li>
               <li>
-                <a style={{ color: "red", fontWeight: "bold" }} href="/detail">SALE</a>
-              </li>
-              <li>
-                <a style={{ marginLeft: "100px" }} href="/about">Về chúng tôi</a>
+                <a style={{ color: "red", fontWeight: "bold" }} href="/about">Về chúng tôi</a>
               </li>
             </ul>
           </div>

@@ -18,6 +18,7 @@ import { getBase64 } from '../../utils'
 const ProfilePage = () => { 
     const user = useSelector((state) => state.user) 
     const [email, setEmail] = useState('') 
+    const [password, setPassword] = useState('') 
     const [name, setName] = useState('') 
     const [phone, setPhone] = useState('') 
     const [address, setAddress] = useState('') 
@@ -34,6 +35,7 @@ const ProfilePage = () => {
  
     useEffect(() => { 
         setEmail(user?.email)
+        setPassword(user?.password)
         setName(user?.name)
         setPhone(user?.phone)
         setAddress(user?.address)
@@ -57,6 +59,9 @@ const ProfilePage = () => {
     const handleOnchangeEmail = (value) => {
         setEmail(value)
     }
+    const handleOnchangePassword = (value) => {
+        setPassword(value)
+    }
     const handleOnchangeName = (value) => {
         setName(value)
     }
@@ -76,7 +81,7 @@ const ProfilePage = () => {
     }
 
     const handleUpdate = () => {
-        mutation.mutate({ id: user?.id, email, name, phone, address, avatar, access_token: user?.access_token })
+        mutation.mutate({ id: user?.id, email, password, name, phone, address, avatar, access_token: user?.access_token })
 
     }
     return (
@@ -116,6 +121,22 @@ const ProfilePage = () => {
                             styleTextButton={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700' }}
                         ></ButtonComponent>
                     </WrapperInput>
+                    {/* <WrapperInput>
+                        <WrapperLabel htmlFor="password">Mật khẩu</WrapperLabel>
+                        <InputForm style={{ width: '300px' }} id="password" value={password} onChange={handleOnchangePassword} />
+                        <ButtonComponent
+                            onClick={handleUpdate}
+                            size={40}
+                            styleButton={{
+                                height: '30px',
+                                width: 'fit-content',
+                                borderRadius: '4px',
+                                padding: '2px 6px 6px'
+                            }}
+                            textbutton={'Cập nhật'}
+                            styleTextButton={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700' }}
+                        ></ButtonComponent>
+                    </WrapperInput> */}
                     <WrapperInput>
                         <WrapperLabel htmlFor="phone">Phone</WrapperLabel>
                         <InputForm style={{ width: '300px' }} id="email" value={phone} onChange={handleOnchangePhone} />
