@@ -135,7 +135,10 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                 </div>
               </li> */}
               <li>
-                <a href="/nikeproducts">Nike</a>
+                <a href="/allproducts">Sản phẩm</a>
+              </li>
+              <li>
+                <a href="/nike">Nike</a>
               </li>
               <li>
                 <a href="/mlb">MLB</a>
@@ -144,7 +147,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                 <a href="/adidasproducts">Adidas</a>
               </li>
               <li>
-                <a href="/detail">Áo quần</a>
+                <a href="/clothes">Áo quần</a>
               </li>
               <li>
                 <a style={{ color: "red", fontWeight: "bold" }} href="/about">Về chúng tôi</a>

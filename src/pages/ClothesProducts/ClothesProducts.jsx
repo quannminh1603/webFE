@@ -4,12 +4,11 @@ import * as ProductService from '../../services/ProductService';
 import { useSelector } from 'react-redux';
 import Loading from '../../components/LoadingComponent/Loading';
 import { useDebounce } from '../../hooks/useDebounce';
-import MlbProductsComponent from '../../components/MlbProductsComponent/MlbProductsComponent';
-import DanhmucDetail from '../ProductDetailsPage/DanhmucDetail/DanhmucDetail';
 import Footer from '../../components/FooterComponent/FooterComponent';
-import ListProductMlb from '../../components/ListProductMlb/ListProductMlb';
+import ListProductClothes from '../../components/ListProductClothes/ListProductClothes';
+import './ClothesProducts.css';
 
-const MlbProducts = () => {
+const ClothesProduct = () => {
   const searchProduct = useSelector((state) => state?.product?.search);
   const searchDebounce = useDebounce(searchProduct, 500);
   const [loading, setLoading] = useState(false);
@@ -25,7 +24,7 @@ const MlbProducts = () => {
     const limit = context && context.queryKey && context.queryKey[1];
     const search = context && context.queryKey && context.queryKey[2];
 
-    const res = await ProductService.getAllProductByType(search, limit, 'Giày MLB').then((res) => {
+    const res = await ProductService.getAllProductByType(search, limit, 'Áo quần thể thao').then((res) => {
       setProductList(res?.data);
       // setLoading(false);
     });
@@ -56,11 +55,11 @@ const MlbProducts = () => {
     <>
       <Loading isLoading={isLoading || loading}>
         {/* <DanhmucDetail /> */}
-        <div style={{ marginBottom: '80px' }} className="list_product_mlb">
-          <h1>Giày MLB</h1>
-          <div className="list_items_mlb">
-          {productList.map((product) => (
-            <ListProductMlb
+        <div style={{ marginBottom: '80px' }} className="list_product_clothes">
+          <h1>Áo quần thể thao</h1>
+          <div className="list_items_clothes">
+          {productList?.map((product) => (
+            <ListProductClothes
               key={product._id}
               countInStock={product.countInStock}
               description={product.description}
@@ -113,4 +112,4 @@ const MlbProducts = () => {
   );
 };
 
-export default MlbProducts;
+export default ClothesProduct;

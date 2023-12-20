@@ -108,6 +108,7 @@ import MlbProducts from "../pages/MlbProducts/MlbProducts";
 import CategoryList from "../pages/AdminPage/Category/CategoryList";
 import CategoryDetail from "../pages/AdminPage/Category/Detail/CategoryDetail";
 import RevenueByWeek from "../pages/AdminPage/components/RevenueByWeek";
+import ClothesProduct from "../pages/ClothesProducts/ClothesProducts";
 
 export const routes = [
     {
@@ -151,8 +152,8 @@ export const routes = [
         isShowHeader: true
     },
     {
-        path: '/nikeproducts',
-        page: NikeProducts,
+        path: '/allProducts',
+        page: ProductsPage,
         isShowHeader: true
     },
     {
@@ -161,8 +162,18 @@ export const routes = [
         isShowHeader: true
     },
     {
+        path: '/nike',
+        page: NikeProducts,
+        isShowHeader: true
+    },
+    {
         path: '/mlb',
         page: MlbProducts,
+        isShowHeader: true
+    },
+    {
+        path: '/clothes',
+        page: ClothesProduct,
         isShowHeader: true
     },
     {
