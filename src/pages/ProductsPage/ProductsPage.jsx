@@ -52,7 +52,7 @@ const ProductsPage = () => {
       <Loading isLoading={isLoading || loading}>
         {/* <DanhmucDetail /> */}
         <div style={{ marginBottom: '80px' }} className="list_product_nike">
-          <h1>Giày Nike</h1>
+          <h1>Danh sách sản phẩm</h1>
           <div className="list_items_nike">
             {products?.data?.map((product) => (
               <NikeProductsComponent

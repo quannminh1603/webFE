@@ -1,8 +1,12 @@
 import React from 'react'
+import HeaderComponent from '../../components/HeaderCompoent/HeaderComponent'
 
 const NotFoundPage = () => {
   return (
-    <div>NotFoundPage</div>
+    <>
+      <HeaderComponent />
+    <div>Liên kết không tồn tại. Vui  lòng quay lại <a href='/'>trang chủ</a></div>
+    </>
   )
 }
 

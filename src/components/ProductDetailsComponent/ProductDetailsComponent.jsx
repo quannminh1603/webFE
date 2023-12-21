@@ -369,7 +369,7 @@ const ProductDetailsComponent = ({idProduct}) => {
                             <ButtonComponent
                                 size={40}
                                 styleButton={{
-                                    background: 'light',
+                                    background: 'red',
                                     height: '48px',
                                     width: '220px',
                                     border: 'none',
